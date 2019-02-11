@@ -26,13 +26,41 @@
         color: black;
     }
 
-    .search-location {
+    .arrow-container {
+        width: 10vh;
+        height: 100%;
         display: flex;
+        justify-content: center;
         align-items: center;
+        position: relative;
 
-        .search-icon {
-            margin: 0 5px;
-            height: 100%;
+        .search-location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    
+            .search-icon {
+                height: 100%;
+            }
         }
+
+        svg {
+            position: absolute;
+
+            .outer {
+                fill: transparent;
+                stroke: #333;
+                stroke-width: 2;
+                stroke-dasharray: 100;
+                stroke-dashoffset: 100;
+                transition: stroke-dashoffset 0.4s;
+            }
+        }
+    }
+
+    .arrow-container:hover {
+        .outer {
+            stroke-dashoffset: 0 !important;   
+        } 
     }
 }

@@ -11,7 +11,12 @@ class MapFooter extends Component {
     render() {
         return (
             <div className="map-footer-container">
-                <ArrowDownwardIcon onClick={this.onArrowClicked} className="arrow"></ArrowDownwardIcon>
+                <div className="arrow-container">
+                    <svg width="40" height="40">
+                        <circle className="outer" cx="20" cy="20" r="15"/>
+                    </svg>
+                    <ArrowDownwardIcon onClick={this.onArrowClicked} className="arrow"></ArrowDownwardIcon>       
+                </div>
             </div>
         );
     }
