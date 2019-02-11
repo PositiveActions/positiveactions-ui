@@ -1,0 +1,20 @@
+.comments-container {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+
+    .comments-title {
+        font-family: $font-secondary;
+        font-weight: 800;
+        font-style: italic;
+        font-size: 6em;
+        color: $secondary-back;
+
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .comments {
+        margin-top: 10px;
+    }
+}

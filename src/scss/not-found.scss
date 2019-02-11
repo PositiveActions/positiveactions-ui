@@ -1,0 +1,17 @@
+.not-found-container {
+    height: 100vh;
+    width: 100%;
+
+    .not-found-text {
+        height: 70vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: $font-secondary;
+        font-weight: 800;
+        font-style: italic;
+        font-size: 6em;
+        color: $secondary-back;
+    }
+}

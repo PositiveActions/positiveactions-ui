@@ -1,0 +1,44 @@
+.more-info-container {
+    width: 90%;
+    margin: 5vh 0 5vh 5%;
+
+    .more-info-element {
+        width: 100%;
+        display: flex;
+        font-size: 0.9em;
+        position: relative;
+        margin: 20px 0;
+
+        .element-name {
+            max-width: 40%;
+            font-weight: 800;
+            color: $primary;
+        }
+
+        .element-value {
+            max-width: 60%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            font-family: $font-secondary;
+            font-weight: 200;
+        }
+    }
+
+    .interested-button {
+        margin: 20px 0;
+        height: 60px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $secondary-back;
+        color: $secondary;
+        font-weight: 800;
+        font-size: 0.9em;
+
+        svg {
+            margin-top: 3px;
+        }
+    }
+}

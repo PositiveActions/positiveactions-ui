@@ -1,0 +1,51 @@
+.comment-container {
+    width: 100%;
+    display: flex;
+
+    .profile {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        align-items: center;
+
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 100%;
+            background-color: $primary;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: $font-secondary;
+            font-weight: 800;
+            font-style: italic;
+            font-size: 2em;
+            color: white;
+        }
+    }
+
+    .comment-text {
+        padding: 20px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .comment-quotes {
+            position: absolute;
+            z-index: -1;
+            color: $secondary-back;
+            top: -20px;
+            right: 20px;
+
+            svg {
+                font-size: 100px;
+            }
+        }
+
+        .comment-date {
+            margin-top: 20px;
+            font-size: 0.8em;
+        }
+    }
+}

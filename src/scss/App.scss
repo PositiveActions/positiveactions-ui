@@ -1,0 +1,28 @@
+@import './_variables.scss';
+@import './home.scss';
+@import './header.scss';
+@import './map.scss';
+@import './map-footer.scss';
+@import './filters.scss';
+@import './events.scss';
+@import './event.scss';
+@import './event-details.scss';
+@import './header-alt.scss';
+@import './more-info.scss';
+@import './comments.scss';
+@import './comment.scss';
+@import './footer.scss';
+@import './conatct.scss';
+@import './not-found.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+body {
+  .App {
+    font-family: $font-primary;
+  }
+}

@@ -1,0 +1,49 @@
+.header-container {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    
+    a:visited {
+        color: black;
+    }
+
+    .logo, .search-location {
+        padding: 0 20px;
+    }
+
+    .logo {
+        font-family: $font-secondary;
+        font-weight: 800;
+        font-style: italic;
+        font-size: 1.8em;
+        pointer-events: none;
+    }
+
+    .search-location {
+        display: flex;
+        align-items: center;
+
+        .search-icon {
+            margin: 0 5px;
+            height: 100%;
+        }
+
+        .location-input {
+            transform: translate(0, -8px)
+        }
+
+        div[class^="MuiInput"]::before {
+            border-bottom: none;
+        }
+        div[class^="MuiInput"]::after{
+            border-bottom: 1px black solid;
+        }
+
+        label[class^="MuiFormLabel"] {
+            color: black;
+        }
+    }
+}

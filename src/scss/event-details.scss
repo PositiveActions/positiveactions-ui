@@ -1,0 +1,66 @@
+.event-details-container {
+    width: 100%;
+
+    .event-details-content {
+        margin-top: 5%;
+
+        .event-meta-info {
+            width: 80%;
+            margin-left: 10%;
+            display: flex;
+            align-items: center;
+            
+            .event-date {
+                font-family: $font-secondary;
+                font-weight: 800;
+                font-style: italic;
+                font-size: 8em;
+                color: $secondary-back;
+                letter-spacing: 5px;
+            }
+
+            .event-title {
+                font-weight: 800;
+                font-size: 1.2em;
+                color: $primary;
+                margin-left: -50px;
+                letter-spacing: 1px;
+            }
+        }
+
+        .event-description {
+            width: 70%;
+            margin-left: 15%;
+
+            p {
+                font-family: $font-secondary;
+                font-weight: 200;
+                text-align: justify;
+                text-justify: inter-word;
+            }
+        }
+
+        .event-diverse-info {
+            width: 85%;
+            margin-top: 3%;
+            background-color: $secondary-back;
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+
+            .event-map {
+                width: 50%;
+                height: 60vh;
+            }
+
+            .event-other-info {
+                position: absolute;
+                z-index: 1;
+                left: 40px;
+                top: 40px;
+                width: 50%;
+                background-color: white;
+            }
+        }
+    }
+}

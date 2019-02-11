@@ -1,0 +1,38 @@
+.header-alt-container {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+
+    a:visited {
+        color: black;
+    }
+
+    div {
+        padding: 0 20px;
+    }
+
+    .logo {
+        font-family: $font-secondary;
+        font-weight: 800;
+        font-style: italic;
+        font-size: 1.8em;
+        pointer-events: none;
+    }
+
+    a:visited {
+        color: black;
+    }
+
+    .search-location {
+        display: flex;
+        align-items: center;
+
+        .search-icon {
+            margin: 0 5px;
+            height: 100%;
+        }
+    }
+}
