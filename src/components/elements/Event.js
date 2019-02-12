@@ -3,6 +3,7 @@ import eventImage from '../../assets/event1.jpg';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 class Event extends Component {
+
     render() {
         return (
             <div className="event-container">
@@ -25,7 +26,8 @@ class Event extends Component {
                             <div className="event-description">
                                 Duis nec turpis pellentesque, sagittis lacus quis, commodo elit. Phasellus volutpat maximus neque vehicula bibendum. Curabitur id augue vel est tincidunt condimentum, sagittis lacus quis, commodo elit...
                             </div>
-                            <a href="/events/1">
+                            <a href="/events/1" className="event-button-container">
+                                <div className="event-button-background"></div>
                                 <div className="event-button">
                                     <ArrowRightAltIcon></ArrowRightAltIcon> &nbsp; more details
                                 </div>
