@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import EventDetails from './components/pages/EventDetails';
 import Contact from './components/elements/Contact';
 import NotFound from './components/pages/NotFound';
+import { Provider } from 'mobx-react';
+import EventsStore from './stores/EventsStore';
 
 class App extends Component {
   render() {
@@ -13,8 +15,12 @@ class App extends Component {
         <div className="App">
           {/* <Home></Home> */}
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/events/:id" component={EventDetails} />
+            <Provider EventsStore={EventsStore}>
+              <React.Fragment>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/events/:id" component={EventDetails} />
+              </React.Fragment>
+            </Provider>
             <Route exact path="/contact" component={Contact} />
             <Route exact path='*' component={NotFound} />
           </Switch>

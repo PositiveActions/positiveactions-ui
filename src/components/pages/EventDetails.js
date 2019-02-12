@@ -4,9 +4,16 @@ import Map from '../elements/Map';
 import MoreInfo from '../elements/MoreInfo';
 import Comments from '../elements/Comments';
 import Footer from '../elements/Footer';
+import { inject, observer } from "mobx-react";
 
+@inject('EventsStore')
+@observer
 class EventDetails extends Component {
     render() {
+        const eventId = this.props.match.params.id;
+        const { EventsStore } = this.props;
+        const event = EventsStore.getEvent(eventId);
+
         return (
             <div className="event-details-container">
                 <HeaderAlt></HeaderAlt>
@@ -17,18 +24,17 @@ class EventDetails extends Component {
                             21/02
                         </div>
                         <div className="event-title">
-                            Lorem ipsum dolor sit amet consectetur
+                            {event.title}
                         </div>
                     </div>
                     <div className="event-description">
                         <p>
-                            &nbsp; &nbsp; &nbsp; &nbsp;Duis nec turpis pellentesque, sagittis lacus quis, commodo elit. Phasellus volutpat maximus neque vehicula bibendum. Curabitur id augue vel est tincidunt condimentum, sagittis lacus quis, commodo elit sed non sem aliquam, venenatis quam vel, euismod tortor. 
-                            <br /> Cras condimentum dui eget justo finibus volutpat. Donec posuere leo erat, quis tristique ex mollis id. Pellentesque rhoncus, justo vel sodales tempor, nibh dui volutpat elit, vel congue magna lectus sit amet erat. Donec neque sapien.
+                            {event.description}
                         </p>
                     </div>
                     <div className="event-diverse-info">
                         <div className="event-other-info">
-                            <MoreInfo></MoreInfo>
+                            <MoreInfo event={event}></MoreInfo>
                         </div>
                         <div className="event-map">
                             <Map></Map>

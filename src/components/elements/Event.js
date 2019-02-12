@@ -5,6 +5,9 @@ import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 class Event extends Component {
 
     render() {
+
+        const { event } = this.props;
+
         return (
             <div className="event-container">
                 <div className="background-square"></div>
@@ -15,18 +18,19 @@ class Event extends Component {
                             21/02 
                         </div>
                         <div className="event-location">
-                            Taipei, Zongzheng District
+                            {event.location_name}
                         </div>
                     </div>
                     <div className="event-detail-info">
                         <div className="event-detail-content">
                             <div className="event-title">
-                                Lorem ipsum dolor sit amet consectetur
+                                {event.title}
                             </div>
                             <div className="event-description">
-                                Duis nec turpis pellentesque, sagittis lacus quis, commodo elit. Phasellus volutpat maximus neque vehicula bibendum. Curabitur id augue vel est tincidunt condimentum, sagittis lacus quis, commodo elit...
+                                {/* We need to cut the text if it exceeds 200 */}
+                                {event.description.length > 200 ? event.description.substr(0, 200) + '...' : event.description}
                             </div>
-                            <a href="/events/1" className="event-button-container">
+                            <a href={"/events/" + event.id} className="event-button-container">
                                 <div className="event-button-background"></div>
                                 <div className="event-button">
                                     <ArrowRightAltIcon></ArrowRightAltIcon> &nbsp; more details

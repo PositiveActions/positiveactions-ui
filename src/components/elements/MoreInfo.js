@@ -3,6 +3,9 @@ import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 class MoreInfo extends Component {
     render() {
+
+        const { event } = this.props;
+
         return (
             <div className="more-info-container">
                 <div className="more-info-element">
@@ -10,7 +13,7 @@ class MoreInfo extends Component {
                         Email contact
                     </div>
                     <div className="element-value">
-                        info@eventwebsite.com
+                        {event.email}
                     </div>
                 </div>
                 <div className="more-info-element">
@@ -26,7 +29,7 @@ class MoreInfo extends Component {
                         Website
                     </div>
                     <div className="element-value">
-                        http://www.eventwebsite.com
+                        {event.website}
                     </div>
                 </div>
                 <div className="interested-button"><ArrowRightAltIcon></ArrowRightAltIcon> &nbsp; i'm interested</div>
