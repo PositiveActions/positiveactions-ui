@@ -7,12 +7,18 @@ import Footer from '../elements/Footer';
 import { inject, observer } from "mobx-react";
 
 @inject('EventsStore')
+@inject('CommentsStore')
 @observer
 class EventDetails extends Component {
     render() {
         const eventId = this.props.match.params.id;
         const { EventsStore } = this.props;
         const event = EventsStore.getEvent(eventId);
+
+        const { CommentsStore } = this.props;
+        const comments = CommentsStore.getEventComments(eventId);
+
+        console.log(comments);
 
         return (
             <div className="event-details-container">
@@ -41,7 +47,7 @@ class EventDetails extends Component {
                         </div>
                     </div>
                 </div>
-                <Comments></Comments>
+                <Comments comments={comments}></Comments>
                 <Footer></Footer>
             </div>
         );
