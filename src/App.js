@@ -8,6 +8,9 @@ import NotFound from './components/pages/NotFound';
 import { Provider } from 'mobx-react';
 import EventsStore from './stores/EventsStore';
 import CommentsStore from './stores/CommentsStore';
+import Profile from './components/pages/Profile';
+import Subscribe from './components/pages/Subscribe';
+import Connect from './components/pages/Connect';
 
 class App extends Component {
   render() {
@@ -20,6 +23,9 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route exact path="/events/:id" component={EventDetails} />
               <Route exact path="/contact" component={Contact} />
+              <Route exact path="/profile/:id" component={Profile} />
+              <Route exact path="/subscribe" component={Subscribe} />
+              <Route exact path="/connect" component={Connect} />
               <Route exact path='*' component={NotFound} />
             </Switch>
           </Provider>

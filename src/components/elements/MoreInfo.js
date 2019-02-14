@@ -32,7 +32,12 @@ class MoreInfo extends Component {
                         {event.website}
                     </div>
                 </div>
-                <div className="interested-button"><ArrowRightAltIcon></ArrowRightAltIcon> &nbsp; i'm interested</div>
+                <div className="interested-button-container">
+                    <div className="interested-button-background"></div>
+                    <div className="interested-button">
+                        <ArrowRightAltIcon></ArrowRightAltIcon> &nbsp; i'm interested
+                    </div>
+                </div>
             </div>
         );
     }

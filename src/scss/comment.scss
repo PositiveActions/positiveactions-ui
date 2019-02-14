@@ -21,6 +21,14 @@
             font-style: italic;
             font-size: 2em;
             color: white;
+            -webkit-transition: background-color 0.2s;
+            transition: background-color 0.2s;
+        }
+    }
+
+    .profile:hover {
+        .profile-image {
+            background-color: $secondary;
         }
     }
 

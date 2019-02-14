@@ -9,7 +9,7 @@ class Comment extends Component {
         return (
             <div className="comment-container">
                 <div className="profile">
-                    <div className="profile-image">{comment.author.split(' ')[0][0] + comment.author.split(' ')[1][0]}</div>
+                    <a href="/profile/1"><div className="profile-image">{comment.author.split(' ')[0][0] + comment.author.split(' ')[1][0]}</div></a>
                     <div className="profile-name">{comment.author}</div>
                 </div>
                 <div className="comment-text">

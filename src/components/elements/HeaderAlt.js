@@ -12,6 +12,7 @@ class HeaderAlt extends Component {
                     <a href="/"><div className="search-location"><KeyboardBackspaceIcon className="search-icon"></KeyboardBackspaceIcon></div></a>
                 </div>
                 <a href="/"><div className="logo">POSITIVE ACTIONS</div></a>
+                <a href="/profile/1"><div className="user-profile">GM</div></a>
             </div>
         );
     }

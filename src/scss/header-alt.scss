@@ -11,7 +11,7 @@
     }
 
     div {
-        padding: 0 20px;
+        margin: 0 20px;
     }
 
     .logo {
@@ -62,5 +62,26 @@
         .outer {
             stroke-dashoffset: 0 !important;   
         } 
+    }
+
+    .user-profile {
+        height: calc(10vh - 20px);
+        width: calc(10vh - 20px);
+        background-color: $primary;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: $font-secondary;
+        font-weight: 800;
+        font-style: italic;
+        font-size: 1em;
+        color: white;
+        -webkit-transition: background-color 0.2s;
+        transition: background-color 0.2s;
+    }
+
+    .user-profile:hover {
+        background-color: $secondary;
     }
 }
