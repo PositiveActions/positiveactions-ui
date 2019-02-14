@@ -3,7 +3,75 @@
     height: 100vh;
 
     .subscribe-content {
-        height: 70vh;
         width: 100%;
+        height: 70vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .subscribe-form {
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+
+            div[class^="MuiFormControl-root"] {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            div[class^="MuiInputBase-root"]::after {
+                border-bottom: 1px black solid !important;
+            }
+            label[class^="MuiFormLabel-root"] {
+                color: black;
+            }
+
+            .subscribe-button-container {
+                width: 100%;
+                height: 50px;
+                position: relative;
+                background-color: $secondary-back;
+                margin: 30px 0;
+                cursor: pointer;
+
+                .subscribe-button-background {
+                    width: 0%;
+                    height: 100%;
+                    position: absolute;
+                    z-index: 0;
+                    top: 0;
+                    left: 0;
+                    background-color: $primary;
+                    -webkit-transition: width 0.4s;
+                    transition: width 0.4s;
+                }
+
+                .subscribe-button {
+                    position: relative;
+                    z-index: 1;
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: $secondary;
+                    font-weight: 800;
+                    -webkit-transition: color 0.4s;
+                    transition: color 0.4s;
+                }
+            }
+
+            .subscribe-button-container:hover {
+                .subscribe-button-background {
+                    width: 100%;
+                }
+        
+                .subscribe-button {
+                    color: white;
+                }
+            }
+        }
     }
 }

@@ -9,8 +9,8 @@ class Events extends Component {
 
         const { EventsStore } = this.props;
         const events = EventsStore.events;
-
-        const eventsElm = events.map(eventElm => <Event event={eventElm} key={eventElm.id}></Event>)
+        EventsStore.getEvents();
+        const eventsElm = (events.length > 0) ? events.map(eventElm => <Event event={eventElm} key={eventElm.id}></Event>) : <div className="no-events">No events to display.</div>
 
         return (
             <div className="events-container">

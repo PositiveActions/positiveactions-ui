@@ -23,31 +23,34 @@ class EventDetails extends Component {
         return (
             <div className="event-details-container">
                 <HeaderAlt></HeaderAlt>
-
-                <div className="event-details-content">
-                    <div className="event-meta-info">
-                        <div className="event-date">
-                            21/02
+                {event ? 
+                <React.Fragment>
+                    <div className="event-details-content">
+                        <div className="event-meta-info">
+                            <div className="event-date">
+                                21/02
+                            </div>
+                            <div className="event-title">
+                                {event.title}
+                            </div>
                         </div>
-                        <div className="event-title">
-                            {event.title}
+                        <div className="event-description">
+                            <p>
+                                {event.description}
+                            </p>
+                        </div>
+                        <div className="event-diverse-info">
+                            <div className="event-other-info">
+                                <MoreInfo event={event}></MoreInfo>
+                            </div>
+                            <div className="event-map">
+                                <Map></Map>
+                            </div>
                         </div>
                     </div>
-                    <div className="event-description">
-                        <p>
-                            {event.description}
-                        </p>
-                    </div>
-                    <div className="event-diverse-info">
-                        <div className="event-other-info">
-                            <MoreInfo event={event}></MoreInfo>
-                        </div>
-                        <div className="event-map">
-                            <Map></Map>
-                        </div>
-                    </div>
-                </div>
                 <Comments comments={comments}></Comments>
+                </React.Fragment>
+                : <div className="no-event">Event not found.</div>}
                 <Footer></Footer>
             </div>
         );

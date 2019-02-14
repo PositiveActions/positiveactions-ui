@@ -1,32 +1,8 @@
 import { observable, action, computed } from "mobx";
+import axios from 'axios';
 
 class EventsStore {
-    @observable events = [
-        {
-            description: 'Duis nec turpis pellentesque, sagittis lacus quis, commodo elit. Phasellus volutpat maximus neque vehicula bibendum. Curabitur id augue vel est tincidunt condimentum, sagittis lacus quis, commodo elit sed non sem aliquam, venenatis quam vel, euismod tortor. Cras condimentum dui eget justo finibus volutpat. Donec posuere leo erat, quis tristique ex mollis id. Pellentesque rhoncus, justo vel sodales tempor, nibh dui volutpat elit, vel congue magna lectus sit amet erat. Donec neque sapien.',
-            title: 'Lorem ipsum dolor sit amet consectetur',
-            location_name: 'Taipei, Zongzheng District',
-            lat: 25.043770,
-            lon: 121.495761,
-            author: 'Marc Sirisak Le Boss',
-            categories: 'All',
-            email: 'info@eventwebsite.com',
-            website: 'http://www.eventwebsite.com',
-            id: '1'
-        },
-        {
-            description: 'Curabitur id augue vel est tincidunt condimentum, sagittis lacus quis.',
-            title: 'Lorem ipsum dolor sit amet consectetur',
-            location_name: 'Paris, 11e Arrondissement',
-            lat: 48.8566,
-            lon: 2.3522,
-            author: 'Guillaume Meigniez',
-            categories: 'All',
-            email: 'info@eventwebsite.com',
-            website: 'http://www.eventwebsite.com',
-            id: '2'
-        }
-    ];
+    @observable events = [];
 
     @action
     getEvent = (id) => {
@@ -35,6 +11,17 @@ class EventsStore {
         });
 
         return event[0] ? event[0] : null;
+    }
+
+    @action
+    getEvents = () => {
+        axios.get('https://cors-anywhere.herokuapp.com/' + 'https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events?category=veganism&lat=25&lon=121&sdate=1449000000&edate=1649290750', {
+            headers: {
+                'x-api-key': 'RV1LqrOcWg3dbZSmkPaNR1z4ZJDWKKMDwU5fmJ38'
+            }
+        })
+        .then(response => console.log(response.data))
+        .catch(err => console.log('err', err));
     }
   }
   

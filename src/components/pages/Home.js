@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../elements/Header';
-import Map from '../elements/Map';
+// import Map from '../elements/Map';
 import MapFooter from '../elements/MapFooter';
 import Filters from '../elements/Filters';
 import Events from '../elements/Events';

@@ -24,6 +24,11 @@
             -webkit-transition: background-color 0.2s;
             transition: background-color 0.2s;
         }
+
+        .profile-name {
+            color: black;
+            margin: 5px 0;
+        }
     }
 
     .profile:hover {

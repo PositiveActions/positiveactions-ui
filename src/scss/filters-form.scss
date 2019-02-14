@@ -1,0 +1,88 @@
+.filters-form-container {
+    width: 100vw;
+    display: table-row;
+
+    .filter-title {
+        font-family: $font-secondary;
+        font-weight: 800;
+        font-style: italic;
+        font-size: 3em;
+        color: $secondary-back;
+    }
+    
+    .categories-filter {
+        width: 100%;
+        margin: 30px 0;
+        
+        span[class^="MuiIconButton-label"] {
+            color: $primary !important;
+        }
+        span[class^="MuiButtonBase-root"] {
+            color: $primary !important;
+        }
+    }
+
+    .dates-filter {
+        width: 100%;
+        margin: 30px 0;
+
+        .dates-checkboxes {
+            form {
+                div[class^="MuiFormControl-root"] {
+                    margin-right: 20px; 
+                }
+                div[class^="MuiInputBase-root"]::after {
+                    border-bottom: 1px black solid !important;
+                }
+                label[class^="MuiFormLabel-root"] {
+                    color: black;
+                }
+            }
+        }
+    }
+
+    .apply-button-container {
+        width: 200px;
+        height: 60px;
+        position: relative;
+        background-color: $secondary-back;
+        margin: 30px 0;
+        cursor: pointer;
+
+        .apply-button-background {
+            width: 0%;
+            height: 100%;
+            position: absolute;
+            z-index: 0;
+            top: 0;
+            left: 0;
+            background-color: $primary;
+            -webkit-transition: width 0.4s;
+            transition: width 0.4s;
+        }
+
+        .apply-button {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $secondary;
+            font-weight: 800;
+            -webkit-transition: color 0.4s;
+            transition: color 0.4s;
+        }
+    }
+
+    .apply-button-container:hover {
+        .apply-button-background {
+            width: 100%;
+        }
+
+        .apply-button {
+            color: white;
+        }
+    }
+}
