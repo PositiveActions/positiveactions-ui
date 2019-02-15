@@ -1,0 +1,28 @@
+.loader-container {
+    width: 40px;
+    height: 40px;
+
+    svg {
+        position: absolute;
+
+        .outer {
+            fill: transparent;
+            stroke: #333;
+            stroke-width: 2;
+            stroke-dasharray: 80;
+            animation-duration: 1s;
+            animation-name: loading;
+            animation-iteration-count: infinite;
+        }
+    }
+}
+
+@keyframes loading {
+    from {
+        stroke-dashoffset: 0;
+    }
+  
+    to {
+        stroke-dashoffset: 160;
+    }
+}

@@ -1,10 +1,8 @@
 import React from "react"
 import { compose, withProps, lifecycle } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
-import { SearchBox } from 'react-google-maps/lib/components/places/SearchBox';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import _ from 'lodash';
 import config from '../../config/config.json';
-import MapMarkers from "./MapMarkers.js";
 
 const MyMapComponent = compose(
   withProps({
@@ -68,31 +66,6 @@ const MyMapComponent = compose(
     center={props.center}
     // onBoundsChanged={props.onBoundsChanged}
   >
-    <SearchBox
-      ref={props.onSearchBoxMounted}
-      bounds={props.bounds}
-      controlPosition={window.google.maps.ControlPosition.TOP_LEFT}
-      onPlacesChanged={props.onPlacesChanged}
-    >
-      <input
-        type="text"
-        placeholder="Search Location"
-        style={{
-          boxSizing: `border-box`,
-          border: `1px solid transparent`,
-          width: `40%`,
-          height: `40px`,
-          marginTop: `10px`,
-          padding: `0 12px`,
-          borderRadius: `3px`,
-          boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-          fontSize: `1.3em`,
-          outline: `none`,
-          textOverflow: `ellipses`,
-        }}
-      />
-    </SearchBox>
-    <MapMarkers></MapMarkers>
     {props.markers.map((marker, index) => <Marker key={index} position={marker.position} />)}
   </GoogleMap>
 );

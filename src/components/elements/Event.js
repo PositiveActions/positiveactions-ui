@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import eventImage from '../../assets/event1.jpg';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
+import { Link } from "react-router-dom";
 
 class Event extends Component {
 
@@ -30,12 +31,12 @@ class Event extends Component {
                                 {/* We need to cut the text if it exceeds 200 */}
                                 {event.description.length > 200 ? event.description.substr(0, 200) + '...' : event.description}
                             </div>
-                            <a href={"/events/" + event.id} className="event-button-container">
+                            <Link to={"/events/" + event.event_id} className="event-button-container">
                                 <div className="event-button-background"></div>
                                 <div className="event-button">
                                     <ArrowRightAltIcon></ArrowRightAltIcon> &nbsp; more details
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                         <div className="event-image">
                             <img src={eventImage} alt="event pic" />

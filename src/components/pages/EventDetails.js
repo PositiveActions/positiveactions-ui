@@ -1,29 +1,35 @@
 import React, { Component } from 'react';
 import HeaderAlt from '../elements/HeaderAlt';
-import Map from '../elements/Map';
+import DetailMap from '../elements/DetailMap';
 import MoreInfo from '../elements/MoreInfo';
-import Comments from '../elements/Comments';
+// import Comments from '../elements/Comments';
 import Footer from '../elements/Footer';
 import { inject, observer } from "mobx-react";
+import Loader from '../elements/Loader';
 
 @inject('EventsStore')
 @inject('CommentsStore')
 @observer
 class EventDetails extends Component {
-    render() {
-        const eventId = this.props.match.params.id;
+
+
+    componentDidMount() {
+        //  Set the current event to this one in the store
         const { EventsStore } = this.props;
-        const event = EventsStore.getEvent(eventId);
+        EventsStore.getEvent(this.props.match.params.id);
+    }
 
-        const { CommentsStore } = this.props;
-        const comments = CommentsStore.getEventComments(eventId);
+    render() {
+        const { EventsStore } = this.props;
+        const event = EventsStore.currentEvent;
 
-        console.log(comments);
+        // const { CommentsStore } = this.props;
+        // const comments = CommentsStore.getEventComments(eventId);
 
         return (
             <div className="event-details-container">
                 <HeaderAlt></HeaderAlt>
-                {event ? 
+                {EventsStore.eventLoading ? <div className="loader"><Loader></Loader></div> : event.event_id ? 
                 <React.Fragment>
                     <div className="event-details-content">
                         <div className="event-meta-info">
@@ -44,11 +50,11 @@ class EventDetails extends Component {
                                 <MoreInfo event={event}></MoreInfo>
                             </div>
                             <div className="event-map">
-                                <Map></Map>
+                                <DetailMap></DetailMap>
                             </div>
                         </div>
                     </div>
-                <Comments comments={comments}></Comments>
+                {/* <Comments comments={comments}></Comments> */}
                 </React.Fragment>
                 : <div className="no-event">Event not found.</div>}
                 <Footer></Footer>
