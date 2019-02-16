@@ -92,7 +92,7 @@ const MyMapComponent = compose(
         }}
       />
     </SearchBox>
-    <MapMarkers></MapMarkers>
+    <MapMarkers events={props.events}></MapMarkers>
     {props.markers.map((marker, index) => <Marker key={index} position={marker.position} />)}
   </GoogleMap>
 );
@@ -121,6 +121,7 @@ export default class MyFancyComponent extends React.PureComponent {
       <MyMapComponent
         isMarkerShown={this.state.isMarkerShown}
         onMarkerClick={this.handleMarkerClick}
+        events={this.props.events}
       />
     )
   }
