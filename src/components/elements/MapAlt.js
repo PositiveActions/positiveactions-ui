@@ -1,6 +1,6 @@
 import React from "react"
 import { compose, withProps, lifecycle } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps"
 import { SearchBox } from 'react-google-maps/lib/components/places/SearchBox';
 import _ from 'lodash';
 import config from '../../config/config.json';
@@ -61,46 +61,31 @@ const MyMapComponent = compose(
   }),
   withScriptjs,
   withGoogleMap
-)((props) =>
-  <GoogleMap
+)((props) => {
+
+    const handleMarkerClick = (event) => {
+        props.onMarkerClick(event);
+    }
+
+    return <GoogleMap
     ref={props.onMapMounted}
     defaultZoom={12}
     center={props.center}
-    // onBoundsChanged={props.onBoundsChanged}
-  >
+    >
     <SearchBox
       ref={props.onSearchBoxMounted}
       bounds={props.bounds}
       controlPosition={window.google.maps.ControlPosition.TOP_LEFT}
       onPlacesChanged={props.onPlacesChanged}
     >
-      <input
-        type="text"
-        placeholder="Search Location"
-        style={{
-          boxSizing: `border-box`,
-          border: `1px solid transparent`,
-          width: `40%`,
-          height: `40px`,
-          marginTop: `10px`,
-          padding: `0 12px`,
-          borderRadius: `3px`,
-          boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-          fontSize: `1.3em`,
-          outline: `none`,
-          textOverflow: `ellipses`,
-        }}
-      />
+        <input className="searchbox-input" type="text" placeholder="Search Location"/>
     </SearchBox>
-    <MapMarkers events={props.events}></MapMarkers>
-    {props.markers.map((marker, index) => <Marker key={index} position={marker.position} />)}
+    <MapMarkers events={props.events} onMarkerClick={handleMarkerClick}></MapMarkers>
   </GoogleMap>
+}
 );
 
 export default class MyFancyComponent extends React.PureComponent {
-  state = {
-    isMarkerShown: false,
-  }
 
   componentDidMount() {
     this.delayedShowMarker()
@@ -112,14 +97,13 @@ export default class MyFancyComponent extends React.PureComponent {
     }, 3000)
   }
 
-  handleMarkerClick = () => {
-    this.setState({ isMarkerShown: false });
+  handleMarkerClick = (event) => {
+    this.props.onMarkerClick(event);
   }
 
   render() {
     return (
       <MyMapComponent
-        isMarkerShown={this.state.isMarkerShown}
         onMarkerClick={this.handleMarkerClick}
         events={this.props.events}
       />

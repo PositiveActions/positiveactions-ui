@@ -1,10 +1,10 @@
 import React from "react"
 import { compose, withProps, lifecycle } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import { withScriptjs, withGoogleMap, GoogleMap} from "react-google-maps";
 import _ from 'lodash';
 import config from '../../config/config.json';
 
-const MyMapComponent = compose(
+const DetailMapComponent = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=" + config.googlMapsKey,
     loadingElement: <div style={{ height: `100%` }} />,
@@ -62,39 +62,18 @@ const MyMapComponent = compose(
 )((props) =>
   <GoogleMap
     ref={props.onMapMounted}
-    defaultZoom={12}
-    center={props.center}
+    defaultZoom={15}
+    center={{lat: props.event.location.lat, lng: props.event.location.lon}}
     // onBoundsChanged={props.onBoundsChanged}
   >
-    {props.markers.map((marker, index) => <Marker key={index} position={marker.position} />)}
   </GoogleMap>
 );
 
-export default class MyFancyComponent extends React.PureComponent {
-  state = {
-    isMarkerShown: false,
-  }
-
-  componentDidMount() {
-    this.delayedShowMarker()
-  }
-
-  delayedShowMarker = () => {
-    setTimeout(() => {
-      this.setState({ isMarkerShown: true })
-    }, 3000)
-  }
-
-  handleMarkerClick = () => {
-    this.setState({ isMarkerShown: false });
-  }
+export default class DetailMap extends React.PureComponent {
 
   render() {
     return (
-      <MyMapComponent
-        isMarkerShown={this.state.isMarkerShown}
-        onMarkerClick={this.handleMarkerClick}
-      />
+      <DetailMapComponent event={this.props.event}/>
     )
   }
 }

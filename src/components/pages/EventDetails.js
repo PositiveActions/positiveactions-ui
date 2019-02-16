@@ -23,9 +23,6 @@ class EventDetails extends Component {
         const { EventsStore } = this.props;
         const event = EventsStore.currentEvent;
 
-        // const { CommentsStore } = this.props;
-        // const comments = CommentsStore.getEventComments(eventId);
-
         return (
             <div className="event-details-container">
                 <HeaderAlt></HeaderAlt>
@@ -50,7 +47,7 @@ class EventDetails extends Component {
                                 <MoreInfo event={event}></MoreInfo>
                             </div>
                             <div className="event-map">
-                                <DetailMap></DetailMap>
+                                <DetailMap event={event}></DetailMap>
                             </div>
                         </div>
                     </div>

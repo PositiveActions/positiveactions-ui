@@ -10,7 +10,7 @@ class Event extends Component {
         const { event } = this.props;
 
         return (
-            <div className="event-container">
+            <div className="event-container" id={'event-id-' + event.event_id}>
                 <div className="background-square"></div>
 
                 <div className="event-content">

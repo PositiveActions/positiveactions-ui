@@ -4,9 +4,9 @@ import { Marker } from "react-google-maps";
 class MapMarkers extends Component {
     render() {
 
-        const { events } = this.props;
+        const { events, onMarkerClick } = this.props;
 
-        const eventsMarkers = events.length > 0 ? events.map((event) => <Marker key={event.event_id} position={{ lat: event.location.lat, lng: event.location.lon }}/>) : null;
+        const eventsMarkers = events.length > 0 ? events.map((event) => <Marker key={event.event_id} position={{ lat: event.location.lat, lng: event.location.lon }} onClick={onMarkerClick.bind(this, event)}/>) : null;
 
         return (
             <div className="markers-container">

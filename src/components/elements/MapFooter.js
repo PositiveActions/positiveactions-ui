@@ -5,7 +5,7 @@ class MapFooter extends Component {
 
     onArrowClicked = (event) => {
         event.preventDefault();
-        window.scrollTo({ top: document.getElementById('filters-container').offsetTop, behavior: 'smooth' })
+        window.scrollTo({ top: document.getElementById('filters-container').offsetTop, behavior: 'smooth' });
     }
 
     render() {

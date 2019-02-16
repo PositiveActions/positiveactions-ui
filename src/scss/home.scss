@@ -9,4 +9,11 @@
         justify-content: center;
         align-items: center;
     }
+
+    .back-to-map-component {
+        display: none;
+        position: fixed;
+        top: calc(50% - 20px);
+        right: calc(5% - 20px);
+    }
 }
