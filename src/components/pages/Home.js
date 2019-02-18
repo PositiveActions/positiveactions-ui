@@ -58,7 +58,6 @@ class Home extends Component {
                 <div className="back-to-map-component">
                     <BackToMap ></BackToMap>
                 </div>
-
             </div>
         );
     }

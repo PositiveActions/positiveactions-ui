@@ -1,0 +1,80 @@
+.add-event-container {
+    width: 100%;
+
+    .add-event-content {
+        width: 100%;
+        min-height: 60vh;
+        display: flex;
+        justify-content: center;
+        margin-top: 10vh;
+
+        form {
+            width: 30%;
+
+            .event-input {
+                width: 100%;
+                margin-bottom: 5vh;
+
+                label[class^="MuiFormLabel-root"] {
+                    color: black;
+                }
+
+                div[class^="MuiInputBase-root"] {
+                    background-color: $secondary-back;
+            
+                    div[class^="MuiPrivateTextarea-root"] {
+                        color: black;        
+                    }
+                }
+            
+                div[class^="MuiInputBase-root"]::after {
+                    border-bottom: 2px solid $primary !important;
+                }
+            }
+
+            .add-event-button-container {
+                width: 100%;
+                height: 60px;
+                position: relative;
+                background-color: $secondary-back;
+                cursor: pointer;
+        
+                .add-event-button-background {
+                    width: 0%;
+                    height: 100%;
+                    position: absolute;
+                    z-index: 0;
+                    top: 0;
+                    left: 0;
+                    background-color: $primary;
+                    -webkit-transition: width 0.4s;
+                    transition: width 0.4s;
+                }
+        
+                .add-event-button {
+                    position: relative;
+                    z-index: 1;
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: $secondary;
+                    font-weight: 800;
+                    -webkit-transition: color 0.4s;
+                    transition: color 0.4s;
+                }
+            }
+        
+            .add-event-button-container:hover {
+                .add-event-button-background {
+                    width: 100%;
+                }
+        
+                .add-event-button {
+                    color: white;
+                }
+            }
+        }
+    }
+}

@@ -27,7 +27,7 @@ class AddComment extends Component {
                         />
                     </div>
                 </div>
-                <div className="add-comment-button-container" onClick={this.props.submitCommentInput}>
+                <div className="add-comment-button-container" onClick={this.onButtonClicked}>
                     <div className="add-comment-button-background"></div>
                     <div className="add-comment-button">
                         Send
@@ -35,6 +35,11 @@ class AddComment extends Component {
                 </div>
             </div>
         );
+    }
+
+    onButtonClicked = (e) => {
+        this.props.submitCommentInput(e);
+        document.getElementById('filled-full-width').value = '';
     }
 }
 
