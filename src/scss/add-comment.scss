@@ -1,0 +1,112 @@
+.add-comment-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .add-comment-main {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        div[class^="MuiInputBase-root"] {
+            background-color: $secondary-back;
+            padding: 20px;
+    
+            div[class^="MuiPrivateTextarea-root"] {
+                color: black;        
+            }
+        }
+    
+        div[class^="MuiInputBase-root"]::after {
+            border-bottom: 2px solid $primary !important;
+        }
+    
+        .profile {
+            display: flex;
+            flex-direction: column;
+            width: 25%;
+            align-items: center;
+    
+            .profile-image {
+                width: 100px;
+                height: 100px;
+                border-radius: 100%;
+                background-color: $primary;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: $font-secondary;
+                font-weight: 800;
+                font-style: italic;
+                font-size: 2em;
+                color: white;
+                -webkit-transition: background-color 0.2s;
+                transition: background-color 0.2s;
+            }
+    
+            .profile-name {
+                color: black;
+                margin: 5px 0;
+            }
+        }
+    
+        .profile:hover {
+            .profile-image {
+                background-color: $secondary;
+            }
+        }
+    
+        .add-comment-input {
+            width: 75%;
+        }
+    }
+
+    .add-comment-button-container {
+        width: 25%;
+        margin-left: 75%;
+        height: 60px;
+        position: relative;
+        background-color: $secondary-back;
+        cursor: pointer;
+
+        .add-comment-button-background {
+            width: 0%;
+            height: 100%;
+            position: absolute;
+            z-index: 0;
+            top: 0;
+            right: 0;
+            background-color: $primary;
+            -webkit-transition: width 0.4s;
+            transition: width 0.4s;
+        }
+
+        .add-comment-button {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $secondary;
+            font-weight: 800;
+            -webkit-transition: color 0.4s;
+            transition: color 0.4s;
+
+            svg {
+                margin-top: 5px;
+            }
+        }
+    }
+
+    .add-comment-button-container:hover {
+        .add-comment-button-background {
+            width: 100%;
+        }
+
+        .add-comment-button {
+            color: white;
+        }
+    }
+}

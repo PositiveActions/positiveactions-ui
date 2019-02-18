@@ -6,54 +6,59 @@ import MoreInfo from '../elements/MoreInfo';
 import Footer from '../elements/Footer';
 import { inject, observer } from "mobx-react";
 import Loader from '../elements/Loader';
+import Comments from '../elements/Comments';
 
-@inject('EventsStore')
-@inject('CommentsStore')
+@inject('EventDetailsStore')
+@inject('UserStore')
 @observer
 class EventDetails extends Component {
 
 
     componentDidMount() {
         //  Set the current event to this one in the store
-        const { EventsStore } = this.props;
-        EventsStore.getEvent(this.props.match.params.id);
+        const { EventDetailsStore, UserStore } = this.props;
+        EventDetailsStore.getEvent(this.props.match.params.id);
+
+        //  Initiate the user timezone
+        UserStore.setUserTimezone();
     }
 
     render() {
-        const { EventsStore } = this.props;
-        const event = EventsStore.currentEvent;
+        const { EventDetailsStore, UserStore } = this.props;
+        const event = EventDetailsStore.currentEvent;
+        // const comments = EventDetailsStore.comments;
 
         return (
             <div className="event-details-container">
                 <HeaderAlt></HeaderAlt>
-                {EventsStore.eventLoading ? <div className="loader"><Loader></Loader></div> : event.event_id ? 
-                <React.Fragment>
-                    <div className="event-details-content">
-                        <div className="event-meta-info">
-                            <div className="event-date">
-                                21/02
+                {EventDetailsStore.eventLoading ? <div className="loader"><Loader></Loader></div> : event.event_id ?
+                    <React.Fragment>
+                        <div className="event-details-content">
+                            <div className="event-meta-info">
+                                <div className="event-date">
+                                    21/02
                             </div>
-                            <div className="event-title">
-                                {event.title}
+                                <div className="event-title">
+                                    {event.title}
+                                </div>
+                            </div>
+                            <div className="event-description">
+                                <p>
+                                    {event.description}
+                                </p>
+                            </div>
+                            <div className="event-diverse-info">
+                                <div className="event-other-info">
+                                    <MoreInfo event={event}></MoreInfo>
+                                </div>
+                                <div className="event-map">
+                                    <DetailMap event={event}></DetailMap>
+                                </div>
                             </div>
                         </div>
-                        <div className="event-description">
-                            <p>
-                                {event.description}
-                            </p>
-                        </div>
-                        <div className="event-diverse-info">
-                            <div className="event-other-info">
-                                <MoreInfo event={event}></MoreInfo>
-                            </div>
-                            <div className="event-map">
-                                <DetailMap event={event}></DetailMap>
-                            </div>
-                        </div>
-                    </div>
-                {/* <Comments comments={comments}></Comments> */}
-                </React.Fragment>
-                : <div className="no-event">Event not found.</div>}
+                        <Comments comments={EventDetailsStore.comments} formatTimestamp={UserStore.getFormatedDateFromTimestamp} addCommentInput={EventDetailsStore.addCommentInput} changeCommentInput={EventDetailsStore.updateCommentInput} submitCommentInput={EventDetailsStore.submitCommentInput}></Comments>
+                    </React.Fragment>
+                    : <div className="no-event">Event not found.</div>}
                 <Footer></Footer>
             </div>
         );

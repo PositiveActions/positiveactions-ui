@@ -16,6 +16,16 @@ import BackToMap from '../elements/BackToMap';
 class Home extends Component {
 
     componentDidMount() {
+        const showPosition = (position) => {
+            //  If position access given, set current position if first time on home this session
+            if (!this.props.EventsStore.userLocationInitiated) {
+                this.props.EventsStore.setUserLocation({lat: position.coords.latitude, lng: position.coords.longitude});
+            }
+            this.props.EventsStore.getEvents();
+        }
+        //  Ask for position permission
+        navigator.geolocation.getCurrentPosition(showPosition);
+
         this.props.EventsStore.getEvents();
 
         //  Display the back to top fixed arrow if scroll > 100vh
@@ -31,12 +41,15 @@ class Home extends Component {
         const events = EventsStore.events;
         const eventsLoading = EventsStore.eventsLoading;
 
+        //  Get location from store. If no location access given, it takes the default location in store.
+        const userLocation = EventsStore.userLocation;
+
         return (
             <div className="home-container">
                 <Header></Header>
                 <div className="map-container">
                     {/* <Map></Map> */}
-                    <MapAlt events={events} onMarkerClick={this.handleMarkerClick}></MapAlt>
+                    <MapAlt events={events} onMarkerClick={this.handleMarkerClick} userLocation={userLocation} handlePositionChange={this.handlePositionChange}></MapAlt>
                 </div>
                 <MapFooter></MapFooter>
                 <Filters></Filters>
@@ -54,6 +67,11 @@ class Home extends Component {
         const { EventsStore } = this.props;
         EventsStore.setActiveEvent(event.event_id);
         window.scrollTo({ top: document.getElementById('event-id-' + event.event_id).offsetTop, behavior: 'smooth' });
+    }
+
+    handlePositionChange = (center) => {
+        this.props.EventsStore.setUserLocation(center);
+        this.props.EventsStore.getEvents();
     }
 }
 

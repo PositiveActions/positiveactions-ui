@@ -5,25 +5,15 @@ class EventsStore {
     @observable events = [];
     @observable eventsLoading = false;
 
-    //  The current event is the event the user selected when he clicks on the "more details" button. The details page shows details about the current event.
-    @observable currentEvent = {};
-    @observable eventLoading = false;
-
     //  The active event is the event selected when the user clicks on a marker. This event is shown as the first one in the events list.
     @observable activeEvent = {};
 
-    @action
-    getEvent = (id) => {
-        const event = this.events.filter((eventTmp) => {
-            return eventTmp.id === id;
-        });
-
-        return event[0] ? event[0] : null;
-    }
+    @observable userLocation = {lat: 40.7127, lng: -74.0059};
+    @observable userLocationInitiated = false;
 
     @action getEvents = () => {
         this.eventsLoading = true;
-        fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events?category=veganism&lat=25.1234&lon=121.4312&sdate=1449000000&edate=1649290750', {
+        fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events?category=veganism&lat=' + this.userLocation.lat + '&lon=' + this.userLocation.lng + '&sdate=1449000000&edate=1649290750', {
             headers: {'x-api-key': config.apiKey},
         }
         ).then(res => {
@@ -31,20 +21,6 @@ class EventsStore {
         }).then(response => {
             this.events = response;
             this.eventsLoading = false;
-        });
-    }
-
-    @action getEvent = (event_id) => {
-        this.eventLoading = true;
-        fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events?category=veganism&lat=25.1234&lon=121.4312&sdate=1449000000&edate=1649290750', {
-            headers: {'x-api-key': config.apiKey},
-        }
-        ).then(res => {
-            return res.json();
-        }).then(response => {
-            this.events = response;
-            this.currentEvent = (this.events.length > 0) ? this.events.filter(eventTmp => eventTmp.event_id === event_id)[0] : {};
-            this.eventLoading = false;
         });
     }
 
@@ -69,6 +45,11 @@ class EventsStore {
             //  To detect the changes in the children we force update the array
             this.events = JSON.parse(JSON.stringify(this.events));
         }
+    }
+
+    @action setUserLocation = (location) => {
+        this.userLocation = location;
+        this.userLocationInitiated = true;
     }
   }
   

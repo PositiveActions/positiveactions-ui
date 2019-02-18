@@ -51,6 +51,8 @@ const MyMapComponent = compose(
           }));
           const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
 
+          this.props.handlePositionChange({lat: nextCenter.lat(places[0].formatted_address), lng:nextCenter.lng(places[0].formatted_address)});
+
           this.setState({
             center: nextCenter,
             markers: nextMarkers,
@@ -69,8 +71,8 @@ const MyMapComponent = compose(
 
     return <GoogleMap
     ref={props.onMapMounted}
-    defaultZoom={12}
-    center={props.center}
+    defaultZoom={10}
+    center={props.userLocation}
     >
     <SearchBox
       ref={props.onSearchBoxMounted}
@@ -101,11 +103,17 @@ export default class MyFancyComponent extends React.PureComponent {
     this.props.onMarkerClick(event);
   }
 
+  handlePositionChange = (center) => {
+    this.props.handlePositionChange(center);
+  }
+
   render() {
     return (
       <MyMapComponent
         onMarkerClick={this.handleMarkerClick}
         events={this.props.events}
+        userLocation={this.props.userLocation}
+        handlePositionChange={this.handlePositionChange}
       />
     )
   }

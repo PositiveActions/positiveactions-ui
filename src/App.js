@@ -7,7 +7,8 @@ import Contact from './components/elements/Contact';
 import NotFound from './components/pages/NotFound';
 import { Provider } from 'mobx-react';
 import EventsStore from './stores/EventsStore';
-import CommentsStore from './stores/CommentsStore';
+import EventDetailsStore from './stores/EventDetailsStore';
+import UserStore from './stores/UserStore';
 import Profile from './components/pages/Profile';
 import Subscribe from './components/pages/Subscribe';
 import Connect from './components/pages/Connect';
@@ -18,7 +19,7 @@ class App extends Component {
       <Router>
         <div className="App">
           {/* <Home></Home> */}
-          <Provider EventsStore={EventsStore} CommentsStore={CommentsStore}>
+          <Provider EventsStore={EventsStore} EventDetailsStore={EventDetailsStore} UserStore={UserStore}>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/events/:id" component={EventDetails} />
