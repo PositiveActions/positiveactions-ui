@@ -36,8 +36,8 @@ class EventDetails extends Component {
                         <div className="event-details-content">
                             <div className="event-meta-info">
                                 <div className="event-date">
-                                    21/02
-                            </div>
+                                    {UserStore.getFormatedDateFromTimestamp(event.sdate, 'MM/DD')}
+                                </div>
                                 <div className="event-title">
                                     {event.title}
                                 </div>

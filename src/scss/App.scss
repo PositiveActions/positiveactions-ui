@@ -32,5 +32,13 @@
 body {
   .App {
     font-family: $font-primary;
+
+    .visible-block {
+      display: block;
+    }
+
+    .invisible {
+      display: none;
+    }
   }
 }

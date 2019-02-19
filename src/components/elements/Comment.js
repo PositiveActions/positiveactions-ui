@@ -17,7 +17,7 @@ class Comment extends Component {
                 <div className="comment-text">
                     <div className="comment-quotes"><FormatQuoteIcon></FormatQuoteIcon></div>
                     <p>{comment.message}</p>
-                    <div className="comment-date">{formatTimestamp(comment.timestamp)}</div>
+                    <div className="comment-date">{formatTimestamp(comment.timestamp, 'L')}</div>
                 </div>
             </div>
         );

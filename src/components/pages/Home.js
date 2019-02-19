@@ -12,6 +12,7 @@ import BackToMap from '../elements/BackToMap';
 // import Loader from './Loader';
 
 @inject('EventsStore')
+@inject('UserStore')
 @observer
 class Home extends Component {
 
@@ -19,7 +20,7 @@ class Home extends Component {
         const showPosition = (position) => {
             //  If position access given, set current position if first time on home this session
             if (!this.props.EventsStore.userLocationInitiated) {
-                this.props.EventsStore.setUserLocation({lat: position.coords.latitude, lng: position.coords.longitude});
+                this.props.EventsStore.setUserLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
             }
             this.props.EventsStore.getEvents();
         }
@@ -29,15 +30,18 @@ class Home extends Component {
         this.props.EventsStore.getEvents();
 
         //  Display the back to top fixed arrow if scroll > 100vh
-        document.addEventListener('scroll', function(e) {
+        document.addEventListener('scroll', function (e) {
             if (document.getElementsByClassName('back-to-map-component')[0]) {
                 document.getElementsByClassName('back-to-map-component')[0].style.display = (window.scrollY > window.innerHeight) ? 'initial' : 'none';
             }
         });
+
+        //  Initiate the user timezone
+        this.props.UserStore.setUserTimezone();
     }
 
     render() {
-        const { EventsStore } = this.props;
+        const { EventsStore, UserStore } = this.props;
         const events = EventsStore.events;
         const eventsLoading = EventsStore.eventsLoading;
 
@@ -53,7 +57,7 @@ class Home extends Component {
                 </div>
                 <MapFooter></MapFooter>
                 <Filters></Filters>
-                <Events events={events} eventsLoading={eventsLoading}></Events>
+                <Events events={events} eventsLoading={eventsLoading} getFormatedDateFromTimestamp={UserStore.getFormatedDateFromTimestamp}></Events>
                 <Footer></Footer>
                 <div className="back-to-map-component">
                     <BackToMap ></BackToMap>

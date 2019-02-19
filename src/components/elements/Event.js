@@ -7,7 +7,7 @@ class Event extends Component {
 
     render() {
 
-        const { event } = this.props;
+        const { event, getFormatedDateFromTimestamp } = this.props;
 
         return (
             <div className="event-container" id={'event-id-' + event.event_id}>
@@ -16,7 +16,7 @@ class Event extends Component {
                 <div className="event-content">
                     <div className="event-meta-info">
                         <div className="event-date">
-                            21/02 
+                            {getFormatedDateFromTimestamp(event.sdate, 'MM/DD')}
                         </div>
                         <div className="event-location">
                             {event.location_name}

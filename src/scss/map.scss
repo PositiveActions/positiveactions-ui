@@ -17,3 +17,33 @@
     outline: none;
     text-overflow: ellipses;
 }
+
+.standalone-map-input {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-bottom: 1px rgba(0, 0, 0, 0.45) solid;
+    background-color: $secondary-back;
+    font-size: 1em;
+    padding: 10px;
+    margin-bottom: 5vh;
+    box-sizing: border-box;
+}
+
+.standalone-map-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: black;
+    opacity: 1; /* Firefox */
+}
+  
+.standalone-map-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: black;
+}
+  
+.standalone-map-input::-ms-input-placeholder { /* Microsoft Edge */
+    color: black;
+}
+
+.standalone-map-input:focus {
+    outline: 0;
+    border-bottom: 2px $primary solid;
+}

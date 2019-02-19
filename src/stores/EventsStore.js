@@ -1,5 +1,6 @@
 import { observable, action } from "mobx";
 import config from '../config/config.json';
+import * as moment from 'moment-timezone';
 
 class EventsStore {
     @observable events = [];
@@ -11,6 +12,17 @@ class EventsStore {
     @observable userLocation = {lat: 40.7127, lng: -74.0059};
     @observable userLocationInitiated = false;
 
+    @observable addEventTitle = '';
+    @observable addEventDescription = '';
+    @observable addEventDate = '';
+    @observable addEventCategory = '';
+    @observable addEventLocationName = '';
+    @observable addEventCoordinates = {};
+    @observable addEventEmail = '';
+
+    @observable submittingEvent = false;
+
+
     @action getEvents = () => {
         this.eventsLoading = true;
         fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events?category=veganism&lat=' + this.userLocation.lat + '&lon=' + this.userLocation.lng + '&sdate=1449000000&edate=1649290750', {
@@ -21,6 +33,39 @@ class EventsStore {
         }).then(response => {
             this.events = response;
             this.eventsLoading = false;
+        });
+    }
+
+    @action submitEvents = () => {
+        this.submittingEvent = true;
+        fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events', {
+            headers: { 'x-api-key': config.apiKey },
+            method: 'POST',
+            body: JSON.stringify(
+                {
+                    title: this.addEventTitle, 
+                    description: this.addEventDescription,
+                    category: this.addEventCategory,
+                    location_name: this.addEventLocationName,
+                    contact: {email: this.addEventEmail},
+                    lat: this.addEventCoordinates.lat,
+                    lng: this.addEventCoordinates.lng,
+                    sdate: moment(this.addEventDate, 'YYYY-MM-DD').format('X')
+                })
+        },
+        ).then(res => {
+            return res.json();
+        }).then(response => {
+            this.submittingEvent = false;
+            this.addEventTitle = '';
+            this.addEventDescription = '';
+            this.addEventCategory = '';
+            this.addEventCoordinates = {};
+            this.addEventDate = '';
+            this.addEventLocationName = '';
+            this.addEventEmail = '';
+            this.events.unshift(response);
+            this.events = JSON.parse(JSON.stringify(this.events));
         });
     }
 
@@ -50,6 +95,33 @@ class EventsStore {
     @action setUserLocation = (location) => {
         this.userLocation = location;
         this.userLocationInitiated = true;
+    }
+
+    @action onAddEventChange = (type, event) => {
+        switch (type) {
+            case 'title':
+                this.addEventTitle = event.target.value;
+            break;
+            case 'description':
+                this.addEventDescription = event.target.value;
+            break;
+            case 'date':
+                this.addEventDate = event.target.value;
+            break;
+            case 'location-name':
+                this.addEventLocationName = event.target.value;
+            break;
+            case 'category':
+                this.addEventCategory = event.target.value;
+            break;
+            case 'coordinates':
+                this.addEventCoordinates = event.target.value;
+            break;
+            case 'email':
+                this.addEventEmail = event.target.value;
+            break;
+            default: console.log('event not found');
+        }
     }
   }
   

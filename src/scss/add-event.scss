@@ -1,5 +1,6 @@
 .add-event-container {
     width: 100%;
+    position: relative;
 
     .add-event-content {
         width: 100%;
@@ -9,7 +10,7 @@
         margin-top: 10vh;
 
         form {
-            width: 30%;
+            width: 40%;
 
             .event-input {
                 width: 100%;
@@ -77,4 +78,26 @@
             }
         }
     }
+
+    .submitting-event-visible {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        background-color: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+
+        .loader {
+            margin-top: 50vh;
+        }
+    }
+    
+    .submitting-event-hidden {
+        display: none;
+    }
+
 }

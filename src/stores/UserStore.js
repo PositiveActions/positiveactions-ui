@@ -8,8 +8,8 @@ class UserStore {
         this.userTimezone = moment.tz.guess();
     }
 
-    @action getFormatedDateFromTimestamp = (timestamp) => {
-        return moment.unix(timestamp).tz(this.userTimezone).format('L');
+    @action getFormatedDateFromTimestamp = (timestamp, format) => {
+        return moment.unix(timestamp).tz(this.userTimezone).format(format);
     }
 }
 

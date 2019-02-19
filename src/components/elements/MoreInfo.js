@@ -13,7 +13,7 @@ class MoreInfo extends Component {
                         Email contact
                     </div>
                     <div className="element-value">
-                        {event.email}
+                        {JSON.parse(event.contact).email}
                     </div>
                 </div>
                 <div className="more-info-element">
@@ -21,10 +21,10 @@ class MoreInfo extends Component {
                         Attending
                     </div>
                     <div className="element-value">
-                        12 people are interested in the event
+                        12 people interested
                     </div>
                 </div>
-                <div className="more-info-element">
+                <div className={"more-info-element " + (JSON.parse(event.contact).website ? 'visible-block' : 'invisible')}>
                     <div className="element-name">
                         Website
                     </div>
