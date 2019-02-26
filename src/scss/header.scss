@@ -123,5 +123,54 @@
                 opacity: 1;
             }
         }
+
+
+        .login-button-container {
+            width: 120px;
+            height: 40px;
+            position: relative;
+            background-color: $secondary-back;
+            cursor: pointer;
+    
+            .login-button-background {
+                width: 0%;
+                height: 100%;
+                position: absolute;
+                z-index: 0;
+                top: 0;
+                right: 0;
+                background-color: $primary;
+                -webkit-transition: width 0.4s;
+                transition: width 0.4s;
+            }
+    
+            .login-button {
+                position: relative;
+                z-index: 1;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: $secondary;
+                font-weight: 800;
+                -webkit-transition: color 0.4s;
+                transition: color 0.4s;
+    
+                svg {
+                    margin-top: 5px;
+                }
+            }
+        }
+    
+        .login-button-container:hover {
+            .login-button-background {
+                width: 100%;
+            }
+    
+            .login-button {
+                color: white;
+            }
+        }
     }
 }

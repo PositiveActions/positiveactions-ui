@@ -11,7 +11,7 @@ import EventDetailsStore from './stores/EventDetailsStore';
 import UserStore from './stores/UserStore';
 import Profile from './components/pages/Profile';
 import Subscribe from './components/pages/Subscribe';
-import Connect from './components/pages/Connect';
+import Login from './components/pages/Login';
 import AddEvent from './components/pages/AddEvent';
 
 class App extends Component {
@@ -27,7 +27,7 @@ class App extends Component {
               <Route exact path="/contact" component={Contact} />
               <Route exact path="/profile/:id" component={Profile} />
               <Route exact path="/subscribe" component={Subscribe} />
-              <Route exact path="/connect" component={Connect} />
+              <Route exact path="/login" component={Login} />
               <Route exact path="/addevent" component={AddEvent} />
               <Route exact path='*' component={NotFound} />
             </Switch>

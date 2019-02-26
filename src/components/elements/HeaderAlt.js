@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 
 class HeaderAlt extends Component {
     render() {
+
+        const { userLoggedIn } = this.props;
+
         return (
             <div className="header-alt-container">
                 <div className="arrow-container">
@@ -13,7 +16,9 @@ class HeaderAlt extends Component {
                     <Link to="/"><div className="search-location"><KeyboardBackspaceIcon className="search-icon"></KeyboardBackspaceIcon></div></Link>
                 </div>
                 <Link to="/"><div className="logo">POSITIVE ACTIONS</div></Link>
-                <Link to="/profile/1"><div className="user-profile">GM</div></Link>
+                <div className={"user-profile-container " + (userLoggedIn ? "visible-flex" : "invisible")}>
+                    <Link to="/profile/1" ><div className="user-profile">GM</div></Link>
+                </div>
             </div>
         );
     }

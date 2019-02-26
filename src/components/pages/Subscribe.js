@@ -5,9 +5,12 @@ import { TextField } from '@material-ui/core';
 
 class Subscribe extends Component {
     render() {
+
+        const { UserStore } = this.props;
+
         return (
             <div className="subscribe-container">
-                <HeaderAlt></HeaderAlt>
+                <HeaderAlt userLoggedIn={UserStore.userLoggedIn}></HeaderAlt>
                     <div className="subscribe-content">
                     <form className="subscribe-form" noValidate autoComplete="off">
                         <TextField

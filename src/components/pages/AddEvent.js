@@ -13,10 +13,11 @@ class AddEvent extends Component {
 
         const { addEventTitle, addEventDescription, addEventDate, addEventCategory, addEventLocationName, addEventEmail, onAddEventChange, submitEvents, submittingEvent } = this.props.EventsStore;
           
-
+        const UserStore = this.props;
+        
         return (
             <div className="add-event-container">
-                <HeaderAlt></HeaderAlt>
+                <HeaderAlt userLoggedIn={UserStore.userLoggedIn}></HeaderAlt>
                 <div className="add-event-content">
                     <form>
                         <TextField

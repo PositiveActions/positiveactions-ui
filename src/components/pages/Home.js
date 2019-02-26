@@ -50,7 +50,7 @@ class Home extends Component {
 
         return (
             <div className="home-container">
-                <Header></Header>
+                <Header userLoggedIn={UserStore.userLoggedIn}></Header>
                 <div className="map-container">
                     {/* <Map></Map> */}
                     <MapAlt events={events} onMarkerClick={this.handleMarkerClick} userLocation={userLocation} handlePositionChange={this.handlePositionChange}></MapAlt>

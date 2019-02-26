@@ -4,9 +4,12 @@ import Footer from '../elements/Footer';
 
 class Profile extends Component {
     render() {
+
+        const { UserStore } = this.props;
+
         return (
             <div className="profile-container">
-                <HeaderAlt></HeaderAlt>
+                <HeaderAlt userLoggedIn={UserStore.userLoggedIn}></HeaderAlt>
                 <div className="profile-content">
                     This is the profile.
                 </div>

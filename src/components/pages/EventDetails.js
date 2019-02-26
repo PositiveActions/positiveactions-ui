@@ -30,7 +30,7 @@ class EventDetails extends Component {
 
         return (
             <div className="event-details-container">
-                <HeaderAlt></HeaderAlt>
+                <HeaderAlt userLoggedIn={UserStore.userLoggedIn}></HeaderAlt>
                 {EventDetailsStore.eventLoading ? <div className="loader"><Loader></Loader></div> : event.event_id ?
                     <React.Fragment>
                         <div className="event-details-content">
