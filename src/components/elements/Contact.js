@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import HeaderAlt from './HeaderAlt';
 import Footer from './Footer';
 
+import { inject, observer } from "mobx-react";
+
+@inject('UserStore')
+@observer
 class Contact extends Component {
     render() {
 

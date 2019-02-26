@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import HeaderAlt from '../elements/HeaderAlt';
 import Footer from '../elements/Footer';
 import { TextField } from '@material-ui/core';
+import { inject, observer } from "mobx-react";
 
+@inject('UserStore')
+@observer
 class Subscribe extends Component {
     render() {
 

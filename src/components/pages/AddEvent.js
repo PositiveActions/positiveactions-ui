@@ -7,17 +7,16 @@ import PlacesWithStandaloneSearchBox from '../elements/PlacesWithStandaloneSearc
 import Loader from '../elements/Loader';
 
 @inject('EventsStore')
+@inject('UserStore')
 @observer
 class AddEvent extends Component {
     render() {
 
         const { addEventTitle, addEventDescription, addEventDate, addEventCategory, addEventLocationName, addEventEmail, onAddEventChange, submitEvents, submittingEvent } = this.props.EventsStore;
-          
-        const UserStore = this.props;
         
         return (
             <div className="add-event-container">
-                <HeaderAlt userLoggedIn={UserStore.userLoggedIn}></HeaderAlt>
+                <HeaderAlt userLoggedIn={this.props.UserStore.userLoggedIn}></HeaderAlt>
                 <div className="add-event-content">
                     <form>
                         <TextField

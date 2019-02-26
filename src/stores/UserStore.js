@@ -7,6 +7,7 @@ class UserStore {
     @observable userEmail = '';
     @observable userPassword = '';
     @observable userLoggingIn = false;
+    @observable userLoggingOut = false;
 
     @action setUserTimezone = () => {
         this.userTimezone = moment.tz.guess();
@@ -16,19 +17,23 @@ class UserStore {
         return moment.unix(timestamp).tz(this.userTimezone).format(format);
     }
 
-    @action userLogin = () => {
+    @action userLogin = (history, event) => {
         this.userLoggingIn = true;
         setTimeout(() => {
             this.userLoggedIn = true;
             this.userEmail = '';
             this.userPassword = '';
             this.userLoggingIn = false;
+            history.push('/');
         }, 1000);
     }
 
-    @action userLogout = () => {
+    @action userLogout = (history, event) => {
+        this.userLoggingOut = true;
         setTimeout(() => {
             this.userLoggedIn = false;
+            this.userLoggingOut = false;
+            history.push('/login');
         }, 1000);
     }
 

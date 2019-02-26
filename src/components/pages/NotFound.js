@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import HeaderAlt from '../elements/HeaderAlt';
 import Footer from '../elements/Footer';
+import { inject, observer } from "mobx-react";
 
+@inject('UserStore')
+@observer
 class NotFound extends Component {
     render() {
 

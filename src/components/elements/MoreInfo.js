@@ -4,7 +4,7 @@ import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 class MoreInfo extends Component {
     render() {
 
-        const { event } = this.props;
+        const { event, participantsCount, submitParticipant } = this.props;
 
         return (
             <div className="more-info-container">
@@ -21,7 +21,7 @@ class MoreInfo extends Component {
                         Attending
                     </div>
                     <div className="element-value">
-                        12 people interested
+                        {participantsCount} people interested
                     </div>
                 </div>
                 <div className={"more-info-element " + (JSON.parse(event.contact).website ? 'visible-block' : 'invisible')}>
@@ -32,7 +32,7 @@ class MoreInfo extends Component {
                         {event.website}
                     </div>
                 </div>
-                <div className="interested-button-container">
+                <div className="interested-button-container" onClick={submitParticipant}>
                     <div className="interested-button-background"></div>
                     <div className="interested-button">
                         <ArrowRightAltIcon></ArrowRightAltIcon> &nbsp; i'm interested

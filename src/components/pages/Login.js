@@ -30,7 +30,7 @@ class Login extends Component {
                             value={userPassword}
                             onChange={changeInput.bind(this, 'password')}
                         />
-                        <div className="connect-button-container" onClick={userLogin}>
+                        <div className="connect-button-container" onClick={userLogin.bind(this, this.props.history)}>
                             <div className="connect-button-background"></div>
                             <div className="connect-button">
                                 log in

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './scss/App.scss';
 import Home from './components/pages/Home';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import EventDetails from './components/pages/EventDetails';
 import Contact from './components/elements/Contact';
 import NotFound from './components/pages/NotFound';
@@ -16,6 +16,15 @@ import AddEvent from './components/pages/AddEvent';
 
 class App extends Component {
   render() {
+
+    //  We create private routes that can not be accessed by anyone
+    const PrivateRoute = ({ component: Component, ...rest }) => (
+      <Route {...rest} render={(props) => (
+        UserStore.userLoggedIn ? <Component {...props} /> : <Redirect to='/login' />
+      )}>
+      </Route>
+    );
+
     return (
       <Router>
         <div className="App">
@@ -28,7 +37,7 @@ class App extends Component {
               <Route exact path="/profile/:id" component={Profile} />
               <Route exact path="/subscribe" component={Subscribe} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/addevent" component={AddEvent} />
+              <PrivateRoute exact path="/addevent" component={AddEvent} />
               <Route exact path='*' component={NotFound} />
             </Switch>
           </Provider>

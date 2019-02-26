@@ -26,6 +26,8 @@ class EventDetails extends Component {
     render() {
         const { EventDetailsStore, UserStore } = this.props;
         const event = EventDetailsStore.currentEvent;
+        const participantsCount = EventDetailsStore.participantsCount;
+        const submitParticipant = EventDetailsStore.submitParticipant;
         // const comments = EventDetailsStore.comments;
 
         return (
@@ -49,7 +51,7 @@ class EventDetails extends Component {
                             </div>
                             <div className="event-diverse-info">
                                 <div className="event-other-info">
-                                    <MoreInfo event={event}></MoreInfo>
+                                    <MoreInfo event={event} participantsCount={participantsCount} submitParticipant={submitParticipant}></MoreInfo>
                                 </div>
                                 <div className="event-map">
                                     <DetailMap event={event}></DetailMap>
