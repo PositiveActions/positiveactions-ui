@@ -15,6 +15,7 @@ class Subscribe extends Component {
             <div className="subscribe-container">
                 <HeaderAlt userLoggedIn={UserStore.userLoggedIn}></HeaderAlt>
                     <div className="subscribe-content">
+                    <div className="signup-text">SIGN UP</div>
                     <form className="subscribe-form" noValidate autoComplete="off">
                         <TextField
                             id="standard-name"
@@ -37,7 +38,7 @@ class Subscribe extends Component {
                         <div className="subscribe-button-container">
                             <div className="subscribe-button-background"></div>
                             <div className="subscribe-button">
-                                subscribe
+                                sign up
                             </div>
                         </div>
                     </form>

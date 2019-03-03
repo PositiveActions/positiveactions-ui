@@ -13,14 +13,17 @@ import Profile from './components/pages/Profile';
 import Subscribe from './components/pages/Subscribe';
 import Login from './components/pages/Login';
 import AddEvent from './components/pages/AddEvent';
+import ForgotPassword from './components/pages/ForgotPassword';
+
 
 class App extends Component {
+  
   render() {
 
     //  We create private routes that can not be accessed by anyone
     const PrivateRoute = ({ component: Component, ...rest }) => (
       <Route {...rest} render={(props) => (
-        UserStore.userLoggedIn ? <Component {...props} /> : <Redirect to='/login' />
+        UserStore.userLoggedIn ? <Component {...props} /> : <Redirect to='/signin' />
       )}>
       </Route>
     );
@@ -35,8 +38,9 @@ class App extends Component {
               <Route exact path="/events/:id" component={EventDetails} />
               <Route exact path="/contact" component={Contact} />
               <Route exact path="/profile/:id" component={Profile} />
-              <Route exact path="/subscribe" component={Subscribe} />
-              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Subscribe} />
+              <Route exact path="/signin" component={Login} />
+              <Route exact path="/forgotpassword" component={ForgotPassword} />
               <PrivateRoute exact path="/addevent" component={AddEvent} />
               <Route exact path='*' component={NotFound} />
             </Switch>

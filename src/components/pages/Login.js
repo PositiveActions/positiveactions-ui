@@ -4,6 +4,7 @@ import Footer from '../elements/Footer';
 import { TextField } from '@material-ui/core';
 import { inject, observer } from "mobx-react";
 import Loader from '../elements/Loader';
+import { Link } from "react-router-dom";
 
 @inject('UserStore')
 @observer
@@ -11,16 +12,17 @@ class Login extends Component {
     render() {
 
         const { UserStore } = this.props;
-        const { userEmail, userPassword, changeInput, userLogin, userLoggingIn } = UserStore;
+        const { userEmail, userPassword, changeInput, userLogin, userLoggingIn, errorMessage } = UserStore;
 
         return (
             <div className="connect-container">
                 <HeaderAlt userLoggedIn={UserStore.userLoggedIn}></HeaderAlt>
                 <div className="connect-content">
-                    <form className="connection-form" noValidate autoComplete="off">
+                    <div className="login-text">SIGN IN</div>
+                    <form className="connection-form" noValidate autoComplete="off" onSubmit={userLogin.bind(this, this.props.history)}>
                         <TextField
-                            label="Email"
-                            type="email"
+                            label="Email or Username"
+                            type="text"
                             value={userEmail}
                             onChange={changeInput.bind(this, 'email')}
                         />
@@ -30,12 +32,14 @@ class Login extends Component {
                             value={userPassword}
                             onChange={changeInput.bind(this, 'password')}
                         />
-                        <div className="connect-button-container" onClick={userLogin.bind(this, this.props.history)}>
+                        <button className="connect-button-container" type="submit">
                             <div className="connect-button-background"></div>
                             <div className="connect-button">
-                                log in
+                                sign in
                             </div>
-                        </div>
+                        </button>
+                        <div className="login-error-message">{errorMessage}</div>
+                        <Link to="/forgotpassword" className="forgot-password-link">Forgot your password ?</Link>
                     </form>
                 </div>
                 <div className={"connect-content-loading " + (userLoggingIn ? 'visible-flex' : 'invisible')}>

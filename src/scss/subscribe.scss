@@ -8,6 +8,18 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
+
+        .signup-text {
+            font-family: $font-secondary;
+            font-weight: 800;
+            font-style: italic;
+            font-size: 6em;
+            color: $secondary-back;
+            position: absolute;
+            left: 25vw;
+            top: 15vh;
+        }
 
         .subscribe-form {
             width: 30%;

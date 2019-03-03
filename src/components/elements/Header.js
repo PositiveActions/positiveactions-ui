@@ -32,10 +32,10 @@ class Header extends Component {
                 </div>
 
                 <div className={"header-right " + (!userLoggedIn ? "visible-flex" : "invisible")}>
-                    <Link to="/login" className="login-button-container">
+                    <Link to="/signin" className="login-button-container">
                         <div className="login-button-background"></div>
                         <div className="login-button">
-                            Login
+                            Sign In
                         </div>
                     </Link>
                 </div>
