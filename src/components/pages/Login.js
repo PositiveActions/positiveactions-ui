@@ -19,18 +19,18 @@ class Login extends Component {
                 <HeaderAlt userLoggedIn={UserStore.userLoggedIn}></HeaderAlt>
                 <div className="connect-content">
                     <div className="login-text">SIGN IN</div>
-                    <form className="connection-form" noValidate autoComplete="off" onSubmit={userLogin.bind(this, this.props.history)}>
+                    <form className="connection-form" noValidate onSubmit={userLogin.bind(this, this.props.history)}>
                         <TextField
-                            label="Email or Username"
+                            label="Username"
                             type="text"
                             value={userEmail}
-                            onChange={changeInput.bind(this, 'email')}
+                            onChange={changeInput.bind(this, 'email signin')}
                         />
                         <TextField
                             label="Password"
                             type="password"
                             value={userPassword}
-                            onChange={changeInput.bind(this, 'password')}
+                            onChange={changeInput.bind(this, 'password signin')}
                         />
                         <button className="connect-button-container" type="submit">
                             <div className="connect-button-background"></div>
@@ -40,6 +40,7 @@ class Login extends Component {
                         </button>
                         <div className="login-error-message">{errorMessage}</div>
                         <Link to="/forgotpassword" className="forgot-password-link">Forgot your password ?</Link>
+                        <Link to="/signup" className="sign-up-link">You don't have an account yet ?</Link>
                     </form>
                 </div>
                 <div className={"connect-content-loading " + (userLoggingIn ? 'visible-flex' : 'invisible')}>

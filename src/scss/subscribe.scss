@@ -84,6 +84,39 @@
                     color: white;
                 }
             }
+
+            .verify-error-message {
+                color: $secondary;
+                font-size: 0.8em;
+            }
+
+            .signup-error-message {
+                color: $secondary;
+                font-size: 0.8em;
+            }
+
+            .sign-in-link {
+                color: $primary;
+                font-size: 0.8em;
+                cursor: pointer;
+                margin-bottom: 5px;
+            }
+
+            .sign-in-link:hover {
+                text-decoration: underline;
+            }
         }
+    }
+
+    .signup-content-loading {
+        position: absolute;
+        top: 10vh;
+        width: 100%;
+        height: 70vh;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.9);
     }
 }

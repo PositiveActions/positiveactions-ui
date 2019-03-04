@@ -90,13 +90,14 @@
                 font-size: 0.8em;
             }
 
-            .forgot-password-link {
+            .forgot-password-link, .sign-up-link {
                 color: $primary;
                 font-size: 0.8em;
                 cursor: pointer;
+                margin-bottom: 5px;
             }
 
-            .forgot-password-link:hover {
+            .forgot-password-link:hover, .sign-up-link:hover {
                 text-decoration: underline;
             }
         }

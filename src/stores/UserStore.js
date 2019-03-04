@@ -10,13 +10,26 @@ class UserStore {
     @observable userPassword = '';
     @observable userLoggingIn = false;
     @observable userLoggingOut = false;
+    @observable userSigningUp = false;
 
     @observable errorMessage = '';
     @observable errorMessageForgotPassword = '';
+    @observable errorMessageVerification = '';
+    @observable errorMessageSignUp = '';
+    @observable userForgotPasswordVerificationError = '';
 
-    @observable userSignInUsername = '';
-    @observable userSignInEmail = '';
-    @observable userSignInPassword = '';
+    @observable userSignUpUsername = '';
+    @observable userSignUpEmail = '';
+    @observable userSignUpPassword = '';
+    @observable userSignUpVerificationCode = '';
+    @observable userSignUpVerificationPending = false;
+    @observable userVerifyingCode = false;
+
+    @observable userForgotPasswordVerificationPending = false;
+    @observable userForgotPasswordVerificationCode = '';
+    @observable userNewPassword = '';
+    @observable userGettingNewPassword = false;
+    @observable userVerifyingNewPasswordCode = false;
 
     @action setUserTimezone = () => {
         this.userTimezone = moment.tz.guess();
@@ -42,54 +55,96 @@ class UserStore {
             this.errorMessage = '';
             history.push('/');
         } catch (err) {
-            if (err.code === 'UserNotConfirmedException') {
-                // The error happens if the user didn't finish the confirmation step when signing up
-                // In this case you need to resend the code and confirm the user
-                // About how to resend the code and confirm the user, please check the signUp part
-            } else if (err.code === 'PasswordResetRequiredException') {
-                // The error happens when the password is reset in the Cognito console
-                // In this case you need to call forgotPassword to reset the password
-                // Please check the Forgot Password part.
-            } else {
-                this.errorMessage = err.message;
-                console.log('err', err);
-            }
-            this.userLoggingIn = false;
-            this.userEmail = '';
-            this.userPassword = '';
+            this.errorMessage = err.message;
+            console.log('err', err);
         }
+        this.userLoggingIn = false;
+        this.userEmail = '';
+        this.userPassword = '';
     }
 
     @action userForgotPassword = async (history, event) => {
         event.preventDefault();
+        this.userGettingNewPassword = true;
         try {
-            const code = await Auth.forgotPassword(this.userEmail);
-            console.log('code', code);
+            await Auth.forgotPassword(this.userEmail);
+
+            //  A finir quand il y aura des utilisateurs pas créés pas les admins aws
+            this.userForgotPasswordVerificationPending = true;
+            this.errorMessageForgotPassword = '';
+            this.userGettingNewPassword = false;
+        } catch (err) {
+            this.errorMessageForgotPassword = err.message;
+            console.log('err', err);
+            this.userGettingNewPassword = false;
+        }
+    }
+
+    @action userForgotPasswordVerifyCode = async (history, event) => {
+        event.preventDefault();
+        this.userVerifyingNewPasswordCode = true;
+        try {
+            await Auth.forgotPasswordSubmit(this.userEmail, this.userForgotPasswordVerificationCode, this.userNewPassword);
+
+            this.userForgotPasswordVerificationError = '';
+            this.userEmail = '';
+            history.push('/signin');
+            this.userForgotPasswordVerificationPending = true;
+            this.userVerifyingNewPasswordCode = false;
+        } catch (err) {
+            this.userForgotPasswordVerificationError = err.message;
+            console.log('err', err);
+            this.userVerifyingNewPasswordCode = false;
+        }
+        this.userForgotPasswordVerificationCode = '';
+    }
+
+    @action userSignUp = async (history, event) => {
+        event.preventDefault();
+        this.userSigningUp = true;
+        try {
+            const user = await Auth.signUp({
+                username: this.userSignUpUsername,
+                password: this.userSignUpPassword,
+                attributes: {
+                    email: this.userSignUpEmail,
+                    preferred_username: this.userSignUpUsername,
+                }
+            });
+            console.log('user', user);
+            this.userSignUpPassword = '';
+            this.userSignUpEmail = '';
+            this.userSignUpVerificationPending = true;
+            this.userSigningUp = false;
 
             //  A finir quand il y aura des utilisateurs pas créés pas les admins aws
 
-            this.errorMessageForgotPassword = '';
+            this.errorMessageSignUp = '';
         } catch (err) {
-            this.errorMessageForgotPassword = err.message;
+            this.userSigningUp = false;
+            this.errorMessageSignUp = err.message;
             console.log('err', err);
         }
         this.userEmail = '';
     }
 
-    @action userSignUp = async (history, event) => {
+    @action userSignUpVerifyCode = async (history, event) => {
         event.preventDefault();
+        this.userVerifyingCode = true;
         try {
-            const code = await Auth.signUp(this.userEmail);
-            console.log('code', code);
-
-            //  A finir quand il y aura des utilisateurs pas créés pas les admins aws
-
-            this.errorMessageForgotPassword = '';
+            const verify = await Auth.confirmSignUp(this.userSignUpUsername, this.userSignUpVerificationCode);
+            console.log('verify', verify);
+            this.userSignUpUsername = '';
+            history.push('/signin');
+            this.errorMessageVerification = '';
+            this.userSignUpVerificationPending = false;
+            this.userVerifyingCode = false;
         } catch (err) {
-            this.errorMessageForgotPassword = err.message;
+            this.errorMessageVerification = err.message;
+            this.userVerifyingCode = false;
             console.log('err', err);
         }
-        this.userEmail = '';
+        this.userSignUpVerificationCode = '';
     }
 
     @action userLogout = (history, event) => {
@@ -103,11 +158,32 @@ class UserStore {
 
     @action changeInput = (type, event) => {
         switch(type) {
-            case 'email':
+            case 'email signin':
                 this.userEmail = event.target.value;
                 break;
-            case 'password':
+            case 'password signin':
                 this.userPassword = event.target.value;
+                break;
+            case 'email signup':
+                this.userSignUpEmail = event.target.value;
+                break;
+            case 'password signup':
+                this.userSignUpPassword = event.target.value;
+                break;
+            case 'username signup':
+                this.userSignUpUsername = event.target.value;
+                break;
+            case 'verification signup':
+                this.userSignUpVerificationCode = event.target.value;
+                break;
+            case 'verification forgot password username':
+                this.userEmail = event.target.value;
+                break;
+            case 'verification forgot password new password':
+                this.userNewPassword = event.target.value;
+                break;
+            case 'verification forgot password code':
+                this.userForgotPasswordVerificationCode = event.target.value;
                 break;
             default: console.log('input type not found');
         }
