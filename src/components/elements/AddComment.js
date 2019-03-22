@@ -24,7 +24,11 @@ class AddComment extends Component {
                             onChange={this.props.changeCommentInput}
                             rows={4}
                             rowsMax={4}
+                            inputProps={{
+                                maxLength: 200,
+                            }}
                         />
+                        <div className="input-length-text">{this.props.commentLength} / 200</div>
                     </div>
                 </div>
                 <div className="add-comment-button-container" onClick={this.onButtonClicked}>

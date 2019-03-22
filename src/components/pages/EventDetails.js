@@ -58,7 +58,7 @@ class EventDetails extends Component {
                                 </div>
                             </div>
                         </div>
-                        <Comments comments={EventDetailsStore.comments} formatTimestamp={UserStore.getFormatedDateFromTimestamp} addCommentInput={EventDetailsStore.addCommentInput} changeCommentInput={EventDetailsStore.updateCommentInput} submitCommentInput={EventDetailsStore.submitCommentInput}></Comments>
+                        <Comments comments={EventDetailsStore.comments} formatTimestamp={UserStore.getFormatedDateFromTimestamp} addCommentInput={EventDetailsStore.addCommentInput} changeCommentInput={EventDetailsStore.updateCommentInput} submitCommentInput={EventDetailsStore.submitCommentInput} commentLength={EventDetailsStore.commentLength}></Comments>
                     </React.Fragment>
                     : <div className="no-event">Event not found.</div>}
                 <Footer></Footer>

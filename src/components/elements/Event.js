@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import eventImage from '../../assets/event1.jpg';
+import eventImage from '../../assets/event-pic1.jpg';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import { Link } from "react-router-dom";
 

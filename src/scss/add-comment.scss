@@ -58,6 +58,16 @@
     
         .add-comment-input {
             width: 75%;
+            position: relative;
+
+            .input-length-text {
+                position: absolute;
+                right: 3px;
+                bottom: 18px;
+                font-size: 0.7em;
+                font-weight: bolder;
+                color: $primary;
+            }
         }
     }
 

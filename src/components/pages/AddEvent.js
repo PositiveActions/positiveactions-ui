@@ -12,7 +12,7 @@ import Loader from '../elements/Loader';
 class AddEvent extends Component {
     render() {
 
-        const { addEventTitle, addEventDescription, addEventDate, addEventCategory, addEventLocationName, addEventEmail, onAddEventChange, submitEvents, submittingEvent } = this.props.EventsStore;
+        const { addEventTitle, addEventDescription, addEventDate, addEventCategory, addEventLocationName, addEventEmail, onAddEventChange, submitEvents, submittingEvent, addEventDescriptionLength } = this.props.EventsStore;
         
         return (
             <div className="add-event-container">
@@ -25,17 +25,26 @@ class AddEvent extends Component {
                             value={addEventTitle}
                             onChange={onAddEventChange.bind(this, 'title')}
                             variant="filled"
+                            inputProps={{
+                                maxLength: 50,
+                            }}
                         />
-                        <TextField
-                            label="Event description"
-                            className="event-input"
-                            multiline={true}
-                            value={addEventDescription}
-                            onChange={onAddEventChange.bind(this, 'description')}
-                            rows={4}
-                            rowsMax={4}
-                            variant="filled"
-                        />
+                        <div className="event-description-container">
+                            <TextField
+                                label="Event description"
+                                className="event-input"
+                                multiline={true}
+                                value={addEventDescription}
+                                onChange={onAddEventChange.bind(this, 'description')}
+                                rows={4}
+                                rowsMax={4}
+                                variant="filled"
+                                inputProps={{
+                                    maxLength: 500,
+                                }}
+                            />
+                            <div className="input-event-description-text">{addEventDescriptionLength} / 500</div>
+                        </div>
                         <TextField
                             label="Event date"
                             type="date"

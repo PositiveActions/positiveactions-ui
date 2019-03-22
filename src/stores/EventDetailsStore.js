@@ -76,6 +76,10 @@ class EventDetailsStore {
         return this.participants.length;
     }
 
+    @computed get commentLength() {
+        return this.addCommentInputs.length;
+    }
+
 }
 
 const singleton = new EventDetailsStore();

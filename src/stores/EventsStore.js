@@ -1,4 +1,4 @@
-import { observable, action } from "mobx";
+import { observable, action, computed } from "mobx";
 import config from '../config/config.json';
 import * as moment from 'moment-timezone';
 
@@ -122,6 +122,11 @@ class EventsStore {
             break;
             default: console.log('event not found');
         }
+    }
+
+    @computed get addEventDescriptionLength() {
+        console.log((this.addEventDescription.match(/\n/g)||[]).length);
+        return this.addEventDescription.length;
     }
   }
   

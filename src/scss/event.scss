@@ -64,6 +64,7 @@
 
                 .event-description {
                     font-family: $font-secondary;
+                    white-space: pre-wrap;
                     font-weight: 200;
                     padding: 15px 0;
                     text-align: justify;

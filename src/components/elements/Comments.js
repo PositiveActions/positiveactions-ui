@@ -17,7 +17,7 @@ class Comments extends Component {
                 <div className="comments">
                     {commentsElm}
                 </div>
-                <AddComment addCommentInput={this.props.addCommentInput} changeCommentInput={this.props.changeCommentInput} submitCommentInput={this.props.submitCommentInput}></AddComment>
+                <AddComment addCommentInput={this.props.addCommentInput} changeCommentInput={this.props.changeCommentInput} submitCommentInput={this.props.submitCommentInput} commentLength={this.props.commentLength}></AddComment>
             </div>
         );
     }
