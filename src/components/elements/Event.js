@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import eventImage from '../../assets/thumbnails/event-pic3.jpg';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import { Link } from "react-router-dom";
 
 class Event extends Component {
 
+    state = {
+        imageUrl: ''
+    }
+
     render() {
 
-        const { event, getFormatedDateFromTimestamp } = this.props;
+        const { event, getFormatedDateFromTimestamp, getEventImage } = this.props;
 
         return (
             <div className="event-container" id={'event-id-' + event.event_id}>
@@ -39,12 +42,26 @@ class Event extends Component {
                             </Link>
                         </div>
                         <div className="event-image">
-                            <img src={eventImage} alt="event pic" />
+                            {this.state.imageUrl === 'https://positiveactions-img.s3.amazonaws.com/default.png' ?
+                                <div className="no-image">No picture for this event yet.</div> : 
+                                <img src={this.state.imageUrl} alt="event pic" />
+                            }
                         </div>
                     </div>
                 </div>
             </div>
         );
+    }
+
+    componentDidMount() {
+        const { event, getEventImage } = this.props;
+
+        if (event.img) {
+            getEventImage(event.img).then(res => {
+                this.setState({imageUrl: res.url})
+            });
+        }
+
     }
 }
 
