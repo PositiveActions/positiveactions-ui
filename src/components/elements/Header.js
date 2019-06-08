@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 // import SearchIcon from '@material-ui/icons/Search';
 // import TextField from '@material-ui/core/TextField';
-import AddIcon from '@material-ui/icons/Add';
+// import AddIcon from '@material-ui/icons/Add';
 
 class Header extends Component {
     render() {
 
-        const { userLoggedIn, userObject } = this.props;
+        const { userLoggedIn, userObject, userId } = this.props;
 
         return (
             <div className="header-container">
@@ -35,7 +35,7 @@ class Header extends Component {
                             </div>
                         </div>
                     </Link>
-                    <Link to="/profile/1"><div className="user-profile">{userLoggedIn ? userObject.username.substr(0, 1).toUpperCase() : '?'}</div></Link>
+                    <Link to={"/profile/" + userId}><div className="user-profile">{userLoggedIn ? userObject.username.substr(0, 1).toUpperCase() : '?'}</div></Link>
                 </div>
 
                 <div className={"header-right " + (!userLoggedIn ? "visible-flex" : "invisible")}>

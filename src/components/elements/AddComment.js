@@ -10,12 +10,6 @@ class AddComment extends Component {
 
     render() {
 
-        this.props.getUser(this.props.userId).then(res => {
-            if (res) {
-                this.setState({commentUser: res});
-            }
-        });
-
         return (
             <div className="add-comment-container">
                 <div className="add-comment-main">
@@ -50,6 +44,14 @@ class AddComment extends Component {
                 </div>
             </div>
         );
+    }
+
+    componentDidMount() {
+        this.props.getUser(this.props.userId).then(res => {
+            if (res) {
+                this.setState({commentUser: res});
+            }
+        });
     }
 
     onButtonClicked = (e) => {

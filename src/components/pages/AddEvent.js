@@ -31,7 +31,7 @@ class AddEvent extends Component {
         
         return (
             <div className="add-event-container">
-                <HeaderAlt userLoggedIn={this.props.UserStore.userLoggedIn} userObject={this.props.UserStore.userObject}></HeaderAlt>
+                <HeaderAlt userLoggedIn={this.props.UserStore.userLoggedIn} userObject={this.props.UserStore.userObject} userId={this.props.UserStore.userId}></HeaderAlt>
                 <div className="add-event-content">
                     <form>
                         <TextField

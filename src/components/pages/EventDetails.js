@@ -32,7 +32,7 @@ class EventDetails extends Component {
 
         return (
             <div className="event-details-container">
-                <HeaderAlt userLoggedIn={UserStore.userLoggedIn} userObject={this.props.UserStore.userObject}></HeaderAlt>
+                <HeaderAlt userLoggedIn={UserStore.userLoggedIn} userObject={this.props.UserStore.userObject} userId={this.props.UserStore.userId}></HeaderAlt>
                 {EventDetailsStore.eventLoading ? <div className="loader"><Loader></Loader></div> : event.event_id ?
                     <React.Fragment>
                         <div className="event-details-content">

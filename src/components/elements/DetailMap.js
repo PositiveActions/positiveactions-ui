@@ -1,6 +1,6 @@
 import React from "react"
 import { compose, withProps, lifecycle } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap} from "react-google-maps";
+import { withScriptjs, withGoogleMap, GoogleMap, Marker} from "react-google-maps";
 import _ from 'lodash';
 import config from '../../config/config.json';
 
@@ -47,6 +47,7 @@ const DetailMapComponent = compose(
           const nextMarkers = places.map(place => ({
             position: place.geometry.location,
           }));
+          console.log('nextMarkers', nextMarkers)
           const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
 
           this.setState({
@@ -66,6 +67,9 @@ const DetailMapComponent = compose(
     center={{lat: props.event.location.lat, lng: props.event.location.lon}}
     // onBoundsChanged={props.onBoundsChanged}
   >
+    <Marker
+      position={{ lat: props.event.location.lat, lng: props.event.location.lon }}
+    />
   </GoogleMap>
 );
 

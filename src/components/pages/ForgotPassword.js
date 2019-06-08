@@ -15,7 +15,7 @@ class ForgotPassword extends Component {
 
         return (
             <div className="forgot-password-container">
-                <HeaderAlt userLoggedIn={userLoggedIn} userObject={this.props.UserStore.userObject}></HeaderAlt>
+                <HeaderAlt userLoggedIn={userLoggedIn} userObject={this.props.UserStore.userObject} userId={this.props.UserStore.userId}></HeaderAlt>
                 <div className="forgot-password-content">
                     <div className="forgot-password-text">FORGOT PASSWORD</div>
                     <form className={"confirmation-form " + (userForgotPasswordVerificationPending ? 'invisible' : 'visible-flex')} noValidate onSubmit={userForgotPassword.bind(this, this.props.history)}>

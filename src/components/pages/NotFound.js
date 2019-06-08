@@ -12,7 +12,7 @@ class NotFound extends Component {
 
         return (
             <div className="not-found-container">
-                <HeaderAlt userLoggedIn={UserStore.userLoggedIn} userObject={this.props.UserStore.userObject}></HeaderAlt>
+                <HeaderAlt userLoggedIn={UserStore.userLoggedIn} userObject={this.props.UserStore.userObject} userId={this.props.UserStore.userId}></HeaderAlt>
                 <div className="not-found-text">PAGE NOT FOUND</div>
                 <Footer></Footer>
             </div>

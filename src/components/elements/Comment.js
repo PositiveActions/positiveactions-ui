@@ -12,13 +12,6 @@ class Comment extends Component {
 
         const { comment, formatTimestamp, getUser } = this.props;
 
-
-        getUser(comment.user_id).then(res => {
-            if (res) {
-                this.setState({commentUser: res});
-            }
-        });
-
         return (
             <div className="comment-container">
                 <Link to="/profile/1" className="profile">
@@ -33,6 +26,17 @@ class Comment extends Component {
                 </div>
             </div>
         );
+    }
+
+    componentDidMount() {
+
+        const { comment, formatTimestamp, getUser } = this.props;
+
+        getUser(comment.user_id).then(res => {
+            if (res) {
+                this.setState({commentUser: res});
+            }
+        });
     }
 }
 
