@@ -74,7 +74,7 @@ class EventDetailsStore {
     }
 
     @computed get participantsCount() {
-        return this.participants.length;
+        return this.participants ? this.participants.length : 0;
     }
 
     @computed get commentLength() {

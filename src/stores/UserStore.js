@@ -1,5 +1,6 @@
 import { observable, action } from "mobx";
 import * as moment from 'moment-timezone';
+import config from '../config/config.json';
 import { Auth } from 'aws-amplify';
 
 
@@ -159,6 +160,17 @@ class UserStore {
             this.userLoggingOut = false;
             history.push('/signin');
         }, 1000);
+    }
+
+    @action getUser = (userId) => {
+        return fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/user?userId=' + userId, {
+            headers: {'x-api-key': config.apiKey},
+        },
+        ).then(res => {
+            return res.json();
+        }).then(response => {
+            return response.user;
+        });
     }
 
     @action changeInput = (type, event) => {
