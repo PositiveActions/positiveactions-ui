@@ -7,6 +7,8 @@ class Events extends Component {
     render() {
         const { events, eventsLoading, getFormatedDateFromTimestamp } = this.props;
 
+        console.log(JSON.parse(JSON.stringify(events)));
+
         //  If events empty show no-events div
         let eventsElm = (events.length > 0) ? events.map(eventElm => <Event event={eventElm} key={eventElm.event_id} getFormatedDateFromTimestamp={getFormatedDateFromTimestamp}></Event>) : <div className="no-events">No events to display.</div>
 

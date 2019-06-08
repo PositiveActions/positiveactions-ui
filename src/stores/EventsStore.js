@@ -23,20 +23,19 @@ class EventsStore {
 
     @observable submittingEvent = false;
 
-    @observable filteredEvents = [];
-    @observable categoryFilters = ['All'];
+    @observable categoryFilters = [{name: 'Veganism', checked: true, id: 'veganism'}, {name: 'Recycling', checked: true, id: 'recycling'}, {name: 'Energy', checked: true, id: 'energy'}];
 
 
     @action getEvents = () => {
         this.eventsLoading = true;
-        fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events?category=veganism&lat=' + this.userLocation.lat + '&lon=' + this.userLocation.lng + '&sdate=1449000000&edate=1649290750', {
+        fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events?category=all&lat=' + this.userLocation.lat + '&lon=' + this.userLocation.lng + '&sdate=1449000000&edate=1649290750', {
             headers: {'x-api-key': config.apiKey},
         }
         ).then(res => {
             return res.json();
         }).then(response => {
             this.events = response;
-            this.filteredEvents = response;
+            // this.filteredEvents = response;
             this.eventsLoading = false;
         });
     }
@@ -72,14 +71,19 @@ class EventsStore {
             this.events.unshift(response);
             this.events = JSON.parse(JSON.stringify(this.events));
 
-            this.filteredEvents.unshift(response);
-            this.filteredEvents = JSON.parse(JSON.stringify(this.filteredEvents));
+            // this.filteredEvents.unshift(response);
+            // this.filteredEvents = JSON.parse(JSON.stringify(this.filteredEvents));
         });
+    }
+
+    @action handleFilterChange = (eventName) => {
+        this.categoryFilters.map(filter => filter.name === eventName ? filter.checked = !filter.checked : null);
+        this.categoryFilters = JSON.parse(JSON.stringify(this.categoryFilters));
     }
 
     @action setActiveEvent = (event_id) => {
         let eventIndex = -1;
-        const event = this.filteredEvents.filter((eventTmp, index) => {
+        const event = this.events.filter((eventTmp, index) => {
             if (eventTmp.event_id === event_id) {
                 eventIndex = index;
                 return true;
@@ -91,12 +95,12 @@ class EventsStore {
         //  Put the active event in first position in the events list
         if (event.length > 0 && eventIndex !== -1) {
             this.activeEvent = event[0];
-            let firstEventTmp = JSON.parse(JSON.stringify(this.filteredEvents[0]));
-            this.filteredEvents[0] = this.activeEvent;
-            this.filteredEvents[eventIndex] = firstEventTmp;
+            let firstEventTmp = JSON.parse(JSON.stringify(this.events[0]));
+            this.events[0] = this.activeEvent;
+            this.events[eventIndex] = firstEventTmp;
 
             //  To detect the changes in the children we force update the array
-            this.filteredEvents = JSON.parse(JSON.stringify(this.filteredEvents));
+            this.events = JSON.parse(JSON.stringify(this.events));
         }
     }
 
@@ -143,6 +147,21 @@ class EventsStore {
     @computed get addEventDescriptionLength() {
         console.log((this.addEventDescription.match(/\n/g)||[]).length);
         return this.addEventDescription.length;
+    }
+
+    @computed get filteredEvents() {
+        let fEvents = this.events.filter(event => {
+            let eventCat = event.category;
+            let selected = true;
+            this.categoryFilters.forEach(filter => {
+                if (filter.id === eventCat) {
+                    selected = filter.checked;
+                }
+            });
+            return selected;
+        });
+
+        return fEvents;
     }
   }
   

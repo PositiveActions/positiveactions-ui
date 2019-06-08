@@ -5,7 +5,7 @@ import { FormControlLabel, Checkbox, TextField } from '@material-ui/core';
 class FiltersForm extends Component {
     render() {
 
-        const { events, filterEvents } = this.props;
+        const { events, filterEvents, categoryFilters } = this.props;
 
         return (
             <div className="filters-form-container">
@@ -14,36 +14,20 @@ class FiltersForm extends Component {
                         CATEGORIES
                     </div>
                     <div className="categories-checkboxes">
+                        {categoryFilters.map(filter => 
                         <FormControlLabel
                             control={
                                 <Checkbox
-                                    checked={true}
-                                // onChange={this.handleChange('checkedB')}
+                                    checked={filter.checked}
+                                    onChange={this.props.handleFilterChange.bind(this, filter.name)}
                                 />
                             }
-                            label="All"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={true}
-                                // onChange={this.handleChange('checkedB')}
-                                />
-                            }
-                            label="Veganism"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={true}
-                                // onChange={this.handleChange('checkedB')}
-                                />
-                            }
-                            label="Recycling"
-                        />
+                            label={filter.name}
+                        />    
+                        )}
                     </div>
                 </div>
-                <div className="dates-filter">
+                {/* <div className="dates-filter">
                     <div className="filter-title">
                         DATES
                     </div>
@@ -73,7 +57,7 @@ class FiltersForm extends Component {
                     <div className="apply-button">
                         apply filters
                     </div>
-                </div>
+                </div> */}
             </div>
         );
     }

@@ -43,7 +43,9 @@ class Home extends Component {
 
     render() {
         const { EventsStore, UserStore } = this.props;
-        const events = EventsStore.filteredEvents;
+        const events = EventsStore.events;
+        const filteredEvents = EventsStore.filteredEvents;
+        console.log(JSON.parse(JSON.stringify(filteredEvents)));
         const eventsLoading = EventsStore.eventsLoading;
 
         //  Get location from store. If no location access given, it takes the default location in store.
@@ -57,8 +59,8 @@ class Home extends Component {
                     <MapAlt events={events} onMarkerClick={this.handleMarkerClick} userLocation={userLocation} handlePositionChange={this.handlePositionChange}></MapAlt>
                 </div>
                 <MapFooter></MapFooter>
-                <Filters events={events} filterEvents={EventsStore.filterEvents}></Filters>
-                <Events events={events} eventsLoading={eventsLoading} getFormatedDateFromTimestamp={UserStore.getFormatedDateFromTimestamp}></Events>
+                <Filters events={filteredEvents} filterEvents={EventsStore.filterEvents} categoryFilters={EventsStore.categoryFilters} handleFilterChange={EventsStore.handleFilterChange}></Filters>
+                <Events events={filteredEvents} eventsLoading={eventsLoading} getFormatedDateFromTimestamp={UserStore.getFormatedDateFromTimestamp}></Events>
                 <Footer></Footer>
                 <div className="back-to-map-component">
                     <BackToMap ></BackToMap>
