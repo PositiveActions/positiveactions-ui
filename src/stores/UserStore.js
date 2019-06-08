@@ -4,6 +4,8 @@ import { Auth } from 'aws-amplify';
 
 
 class UserStore {
+    @observable userObject = {};
+
     @observable userTimezone = '';
     @observable userLoggedIn = false;
     @observable userEmail = '';
@@ -11,6 +13,7 @@ class UserStore {
     @observable userLoggingIn = false;
     @observable userLoggingOut = false;
     @observable userSigningUp = false;
+    @observable userId = '';
 
     @observable errorMessage = '';
     @observable errorMessageForgotPassword = '';
@@ -47,6 +50,8 @@ class UserStore {
             
             // The user directly signs in
             console.log('user', user);
+            this.userObject = user;
+            this.userId = user.signInUserSession.idToken.payload.sub;
 
             this.userLoggingIn = false;
             this.userLoggedIn = true;

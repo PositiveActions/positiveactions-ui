@@ -5,9 +5,11 @@ import AddComment from './AddComment';
 class Comments extends Component {
     render() {
 
-        const { comments } = this.props;
+        const { comments, userId } = this.props;
 
-        const commentsElm = comments.length > 0 ? comments.map(comment => <React.Fragment key={comment.comment_id}><Comment comment={comment} formatTimestamp={this.props.formatTimestamp}></Comment><br></br></React.Fragment>) : null;
+        let commentsElm = comments.length > 0 ? comments.map(comment => <React.Fragment key={comment.comment_id}><Comment comment={comment} formatTimestamp={this.props.formatTimestamp}></Comment><br></br></React.Fragment>) : null;
+
+        commentsElm = commentsElm.reverse();
 
         return (
             <div className="comments-container">      
@@ -17,7 +19,7 @@ class Comments extends Component {
                 <div className="comments">
                     {commentsElm}
                 </div>
-                <AddComment addCommentInput={this.props.addCommentInput} changeCommentInput={this.props.changeCommentInput} submitCommentInput={this.props.submitCommentInput} commentLength={this.props.commentLength}></AddComment>
+                <AddComment addCommentInput={this.props.addCommentInput} changeCommentInput={this.props.changeCommentInput} submitCommentInput={this.props.submitCommentInput} commentLength={this.props.commentLength} userId={userId}></AddComment>
             </div>
         );
     }

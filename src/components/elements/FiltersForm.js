@@ -4,6 +4,9 @@ import { FormControlLabel, Checkbox, TextField } from '@material-ui/core';
 
 class FiltersForm extends Component {
     render() {
+
+        const { events, filterEvents } = this.props;
+
         return (
             <div className="filters-form-container">
                 <div className="categories-filter">

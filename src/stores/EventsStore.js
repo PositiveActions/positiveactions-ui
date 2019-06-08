@@ -19,8 +19,12 @@ class EventsStore {
     @observable addEventLocationName = '';
     @observable addEventCoordinates = {};
     @observable addEventEmail = '';
+    @observable addEventImage = '';
 
     @observable submittingEvent = false;
+
+    @observable filteredEvents = [];
+    @observable categoryFilters = ['All'];
 
 
     @action getEvents = () => {
@@ -32,6 +36,7 @@ class EventsStore {
             return res.json();
         }).then(response => {
             this.events = response;
+            this.filteredEvents = response;
             this.eventsLoading = false;
         });
     }
@@ -66,12 +71,15 @@ class EventsStore {
             this.addEventEmail = '';
             this.events.unshift(response);
             this.events = JSON.parse(JSON.stringify(this.events));
+
+            this.filteredEvents.unshift(response);
+            this.filteredEvents = JSON.parse(JSON.stringify(this.filteredEvents));
         });
     }
 
     @action setActiveEvent = (event_id) => {
         let eventIndex = -1;
-        const event = this.events.filter((eventTmp, index) => {
+        const event = this.filteredEvents.filter((eventTmp, index) => {
             if (eventTmp.event_id === event_id) {
                 eventIndex = index;
                 return true;
@@ -83,13 +91,17 @@ class EventsStore {
         //  Put the active event in first position in the events list
         if (event.length > 0 && eventIndex !== -1) {
             this.activeEvent = event[0];
-            let firstEventTmp = JSON.parse(JSON.stringify(this.events[0]));
-            this.events[0] = this.activeEvent;
-            this.events[eventIndex] = firstEventTmp;
+            let firstEventTmp = JSON.parse(JSON.stringify(this.filteredEvents[0]));
+            this.filteredEvents[0] = this.activeEvent;
+            this.filteredEvents[eventIndex] = firstEventTmp;
 
             //  To detect the changes in the children we force update the array
-            this.events = JSON.parse(JSON.stringify(this.events));
+            this.filteredEvents = JSON.parse(JSON.stringify(this.filteredEvents));
         }
+    }
+
+    @action filterEvents = (filters) => {
+        console.log(filters);
     }
 
     @action setUserLocation = (location) => {
@@ -119,6 +131,10 @@ class EventsStore {
             break;
             case 'email':
                 this.addEventEmail = event.target.value;
+            break;
+            case 'image':
+            console.log('set image to', event.target.value)
+                this.addEventImage = event.target.value;
             break;
             default: console.log('event not found');
         }

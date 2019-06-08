@@ -44,11 +44,12 @@ class EventDetailsStore {
         this.addCommentInputs = event.target.value;
     }
 
-    @action submitCommentInput = () => {
+    @action submitCommentInput = (userId) => {
+        console.log(this.addCommentInputs, this.currentEvent.event_id)
         fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/comments', {
             headers: { 'x-api-key': config.apiKey },
             method: 'POST',
-            body: JSON.stringify({message: this.addCommentInputs, event_id: this.currentEvent.event_id})
+            body: JSON.stringify({message: this.addCommentInputs, event_id: this.currentEvent.event_id, user_id: userId})
         },
         ).then(res => {
             return res.json();

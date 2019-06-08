@@ -13,7 +13,7 @@ class Profile extends Component {
 
         return (
             <div className="profile-container">
-                <HeaderAlt userLoggedIn={UserStore.userLoggedIn}></HeaderAlt>
+                <HeaderAlt userLoggedIn={UserStore.userLoggedIn} userObject={this.props.UserStore.userObject}></HeaderAlt>
                 <div className="profile-content">
                     <div className="logout-button-container" onClick={UserStore.userLogout.bind(this, this.props.history)}>
                         <div className="logout-button-background"></div>

@@ -29,7 +29,7 @@ class Subscribe extends Component {
 
         return (
             <div className="subscribe-container">
-                <HeaderAlt userLoggedIn={userLoggedIn}></HeaderAlt>
+                <HeaderAlt userLoggedIn={userLoggedIn} userObject={this.props.UserStore.userObject}></HeaderAlt>
                     <div className="subscribe-content">
                     <div className="signup-text">SIGN UP</div>
                     <form className={"subscribe-form " + (userSignUpVerificationPending ? 'invisible' : 'visible-flex')} noValidate onSubmit={userSignUp.bind(this, this.props.history)}>

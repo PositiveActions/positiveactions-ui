@@ -16,7 +16,7 @@ class Login extends Component {
 
         return (
             <div className="connect-container">
-                <HeaderAlt userLoggedIn={UserStore.userLoggedIn}></HeaderAlt>
+                <HeaderAlt userLoggedIn={UserStore.userLoggedIn} userObject={UserStore.userObject}></HeaderAlt>
                 <div className="connect-content">
                     <div className="login-text">SIGN IN</div>
                     <form className="connection-form" noValidate onSubmit={userLogin.bind(this, this.props.history)}>

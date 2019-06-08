@@ -38,11 +38,12 @@ class Home extends Component {
 
         //  Initiate the user timezone
         this.props.UserStore.setUserTimezone();
+
     }
 
     render() {
         const { EventsStore, UserStore } = this.props;
-        const events = EventsStore.events;
+        const events = EventsStore.filteredEvents;
         const eventsLoading = EventsStore.eventsLoading;
 
         //  Get location from store. If no location access given, it takes the default location in store.
@@ -50,13 +51,13 @@ class Home extends Component {
 
         return (
             <div className="home-container">
-                <Header userLoggedIn={UserStore.userLoggedIn}></Header>
+                <Header userLoggedIn={UserStore.userLoggedIn} userObject={this.props.UserStore.userObject}></Header>
                 <div className="map-container">
                     {/* <Map></Map> */}
                     <MapAlt events={events} onMarkerClick={this.handleMarkerClick} userLocation={userLocation} handlePositionChange={this.handlePositionChange}></MapAlt>
                 </div>
                 <MapFooter></MapFooter>
-                <Filters></Filters>
+                <Filters events={events} filterEvents={EventsStore.filterEvents}></Filters>
                 <Events events={events} eventsLoading={eventsLoading} getFormatedDateFromTimestamp={UserStore.getFormatedDateFromTimestamp}></Events>
                 <Footer></Footer>
                 <div className="back-to-map-component">

@@ -7,7 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 class Header extends Component {
     render() {
 
-        const { userLoggedIn } = this.props;
+        const { userLoggedIn, userObject } = this.props;
 
         return (
             <div className="header-container">
@@ -18,7 +18,8 @@ class Header extends Component {
                         <TextField className="location-input" label="Search Location" type="text"/>
                     </div> */}
                     <Link to='/addevent' className="add-event-component">
-                        <div className="add-event-text">
+
+                        {/* <div className="add-event-text">
                             Add event
                         </div>
                         <div className="add-event-icon">
@@ -26,9 +27,15 @@ class Header extends Component {
                                 <circle className="outer" cx="20" cy="20" r="15"/>
                             </svg>
                             <AddIcon></AddIcon>
+                        </div> */}
+                        <div className="add-event-button-container">
+                            <div className="add-event-button-background"></div>
+                            <div className="add-event-button">
+                                Add event
+                            </div>
                         </div>
                     </Link>
-                    <Link to="/profile/1"><div className="user-profile">GM</div></Link>
+                    <Link to="/profile/1"><div className="user-profile">{userLoggedIn ? userObject.username.substr(0, 1).toUpperCase() : '?'}</div></Link>
                 </div>
 
                 <div className={"header-right " + (!userLoggedIn ? "visible-flex" : "invisible")}>

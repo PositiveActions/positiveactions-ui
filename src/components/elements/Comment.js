@@ -11,7 +11,7 @@ class Comment extends Component {
             <div className="comment-container">
                 <Link to="/profile/1" className="profile">
                     {/* <div className="profile-image">{comment.author.split(' ')[0][0] + comment.author.split(' ')[1][0]}</div> */}
-                    <div className="profile-image">AN</div>
+                    <div className="profile-image">?</div>
                     <div className="profile-name">Anonymous</div>
                 </Link>
                 <div className="comment-text">

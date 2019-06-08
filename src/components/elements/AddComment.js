@@ -10,7 +10,7 @@ class AddComment extends Component {
                 <div className="add-comment-main">
                     <Link to="/profile/1" className="profile">
                         {/* <div className="profile-image">{comment.author.split(' ')[0][0] + comment.author.split(' ')[1][0]}</div> */}
-                        <div className="profile-image">AN</div>
+                        <div className="profile-image">?</div>
                         <div className="profile-name">Anonymous</div>
                     </Link>
                     <div className="add-comment-input">
@@ -42,7 +42,7 @@ class AddComment extends Component {
     }
 
     onButtonClicked = (e) => {
-        this.props.submitCommentInput(e);
+        this.props.submitCommentInput(this.props.userId);
         document.getElementById('filled-full-width').value = '';
     }
 }

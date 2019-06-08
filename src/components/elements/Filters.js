@@ -34,7 +34,7 @@ class Filters extends Component {
                         <ExpandMoreIcon></ExpandMoreIcon>
                     </div>
                 </div>
-                <Collapse in={this.state.collapsedFilters} className="collapse-container"><FiltersForm></FiltersForm></Collapse>
+                <Collapse in={this.state.collapsedFilters} className="collapse-container"><FiltersForm events={this.props.events} filterEvents={this.props.filterEvents}></FiltersForm></Collapse>
             </div>
         );
     }
