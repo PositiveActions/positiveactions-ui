@@ -73,11 +73,13 @@
                         object-fit: cover;
                         object-position: 100% 0;
                         padding: 3px;
+                        transition: padding 0.2s;
                         cursor: pointer;
+                        border-radius: 2px;
 
-                        // &:hover {
-                        //     padding: 5px;
-                        // }
+                        &:hover {
+                            padding: 5px;
+                        }
                     }
 
                     .image-upload {
@@ -145,7 +147,7 @@
                     }
 
                     .selected-image {
-                        padding: 10px;
+                        padding: 12px !important;
                     }
                 }
             }

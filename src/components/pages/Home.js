@@ -58,7 +58,8 @@ class Home extends Component {
                     <MapAlt events={events} onMarkerClick={this.handleMarkerClick} userLocation={userLocation} handlePositionChange={this.handlePositionChange}></MapAlt>
                 </div>
                 <MapFooter></MapFooter>
-                <Filters events={filteredEvents} filterEvents={EventsStore.filterEvents} categoryFilters={EventsStore.categoryFilters} handleFilterChange={EventsStore.handleFilterChange}></Filters>
+                <Filters events={filteredEvents} filterEvents={EventsStore.filterEvents} categoryFilters={EventsStore.categoryFilters} handleFilterChange={EventsStore.handleFilterChange} dateFilterEdate={EventsStore.dateFilterEdate} dateFilterSdate={EventsStore.dateFilterSdate} handleDateFilterChange={EventsStore.handleDateFilterChange}></Filters>
+
                 <Events events={filteredEvents} eventsLoading={eventsLoading} getFormatedDateFromTimestamp={UserStore.getFormatedDateFromTimestamp} getEventImage={EventsStore.getEventImage}></Events>
                 <Footer></Footer>
                 <div className="back-to-map-component">

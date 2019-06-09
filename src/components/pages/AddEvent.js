@@ -26,8 +26,10 @@ import eventPic14 from '../../assets/thumbnails/event-pic14.jpg';
 @observer
 class AddEvent extends Component {
     render() {
-
+    
         const { addEventTitle, addEventDescription, addEventDate, addEventCategory, addEventLocationName, addEventEmail, onAddEventChange, submitEvents, submittingEvent, addEventDescriptionLength, addEventImage } = this.props.EventsStore;
+
+        const { userId } = this.props.UserStore;
         
         return (
             <div className="add-event-container">
@@ -97,20 +99,20 @@ class AddEvent extends Component {
                         <div className="image-selector-container">
                             <div className="image-selector-title">Select an image</div>
                             <div className="image-selector">
-                                <img className={addEventImage === '1' ? 'selected-image' : ''} src={eventPic1} alt="event 1" onClick={this.changeEventImage.bind(this, '1')}></img>
-                                <img className={addEventImage === '2' ? 'selected-image' : ''} src={eventPic2} alt="event 2" onClick={this.changeEventImage.bind(this, '2')}></img>
-                                <img className={addEventImage === '3' ? 'selected-image' : ''} src={eventPic3} alt="event 3" onClick={this.changeEventImage.bind(this, '3')}></img>
-                                <img className={addEventImage === '4' ? 'selected-image' : ''} src={eventPic4} alt="event 4" onClick={this.changeEventImage.bind(this, '4')}></img>
-                                <img className={addEventImage === '5' ? 'selected-image' : ''} src={eventPic5} alt="event 5" onClick={this.changeEventImage.bind(this, '5')}></img>
-                                <img className={addEventImage === '6' ? 'selected-image' : ''} src={eventPic6} alt="event 6" onClick={this.changeEventImage.bind(this, '6')}></img>
-                                <img className={addEventImage === '7' ? 'selected-image' : ''} src={eventPic7} alt="event 7" onClick={this.changeEventImage.bind(this, '7')}></img>
-                                <img className={addEventImage === '8' ? 'selected-image' : ''} src={eventPic8} alt="event 8" onClick={this.changeEventImage.bind(this, '8')}></img>
-                                <img className={addEventImage === '9' ? 'selected-image' : ''} src={eventPic9} alt="event 9" onClick={this.changeEventImage.bind(this, '9')}></img>
-                                <img className={addEventImage === '10' ? 'selected-image' : ''} src={eventPic10} alt="event 10" onClick={this.changeEventImage.bind(this, '10')}></img>
-                                <img className={addEventImage === '11' ? 'selected-image' : ''} src={eventPic11} alt="event 11" onClick={this.changeEventImage.bind(this, '11')}></img>
-                                <img className={addEventImage === '12' ? 'selected-image' : ''} src={eventPic12} alt="event 12" onClick={this.changeEventImage.bind(this, '12')}></img>
-                                <img className={addEventImage === '13' ? 'selected-image' : ''} src={eventPic13} alt="event 13" onClick={this.changeEventImage.bind(this, '13')}></img>
-                                <img className={addEventImage === '14' ? 'selected-image' : ''} src={eventPic14} alt="event 14" onClick={this.changeEventImage.bind(this, '14')}></img>
+                                <img className={addEventImage === '1' ? 'selected-image' : ''} src={eventPic1} alt="event 1" onClick={this.changeEventImage.bind(this, '1', eventPic1)}></img>
+                                <img className={addEventImage === '2' ? 'selected-image' : ''} src={eventPic2} alt="event 2" onClick={this.changeEventImage.bind(this, '2', eventPic2)}></img>
+                                <img className={addEventImage === '3' ? 'selected-image' : ''} src={eventPic3} alt="event 3" onClick={this.changeEventImage.bind(this, '3', eventPic3)}></img>
+                                <img className={addEventImage === '4' ? 'selected-image' : ''} src={eventPic4} alt="event 4" onClick={this.changeEventImage.bind(this, '4', eventPic4)}></img>
+                                <img className={addEventImage === '5' ? 'selected-image' : ''} src={eventPic5} alt="event 5" onClick={this.changeEventImage.bind(this, '5', eventPic5)}></img>
+                                <img className={addEventImage === '6' ? 'selected-image' : ''} src={eventPic6} alt="event 6" onClick={this.changeEventImage.bind(this, '6', eventPic6)}></img>
+                                <img className={addEventImage === '7' ? 'selected-image' : ''} src={eventPic7} alt="event 7" onClick={this.changeEventImage.bind(this, '7', eventPic7)}></img>
+                                <img className={addEventImage === '8' ? 'selected-image' : ''} src={eventPic8} alt="event 8" onClick={this.changeEventImage.bind(this, '8', eventPic8)}></img>
+                                <img className={addEventImage === '9' ? 'selected-image' : ''} src={eventPic9} alt="event 9" onClick={this.changeEventImage.bind(this, '9', eventPic9)}></img>
+                                <img className={addEventImage === '10' ? 'selected-image' : ''} src={eventPic10} alt="event 10" onClick={this.changeEventImage.bind(this, '10', eventPic10)}></img>
+                                <img className={addEventImage === '11' ? 'selected-image' : ''} src={eventPic11} alt="event 11" onClick={this.changeEventImage.bind(this, '11', eventPic1)}></img>
+                                <img className={addEventImage === '12' ? 'selected-image' : ''} src={eventPic12} alt="event 12" onClick={this.changeEventImage.bind(this, '12', eventPic12)}></img>
+                                <img className={addEventImage === '13' ? 'selected-image' : ''} src={eventPic13} alt="event 13" onClick={this.changeEventImage.bind(this, '13', eventPic13)}></img>
+                                <img className={addEventImage === '14' ? 'selected-image' : ''} src={eventPic14} alt="event 14" onClick={this.changeEventImage.bind(this, '14', eventPic14)}></img>
                                 <div className="image-upload" onClick={this.uploadImage}>
                                     <div className="upload-button-container">
                                         <div className="upload-button-background"></div>
@@ -121,7 +123,7 @@ class AddEvent extends Component {
                                 </div>
                                 </div>
                         </div>
-                        <div className="add-event-button-container" onClick={submitEvents}>
+                        <div className="add-event-button-container" onClick={submitEvents.bind(this, userId)}>
                             <div className="add-event-button-background"></div>
                             <div className="add-event-button">
                                 add event
@@ -137,8 +139,8 @@ class AddEvent extends Component {
         );
     }
 
-    changeEventImage = (imageCode, e) => {
-        const event = {target: {value: imageCode}};
+    changeEventImage = (imageCode, imageUrl, e) => {
+        const event = {target: {value: imageCode, url: imageUrl}};
         this.props.EventsStore.onAddEventChange('image', event);
     }
 

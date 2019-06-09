@@ -1,6 +1,8 @@
 import { observable, action, computed } from "mobx";
 import config from '../config/config.json';
 import * as moment from 'moment-timezone';
+import * as image2base64 from 'image-to-base64';
+import eventPic1 from '../assets/thumbnails/event-pic1.jpg';
 
 class EventsStore {
     @observable events = [];
@@ -19,22 +21,26 @@ class EventsStore {
     @observable addEventLocationName = '';
     @observable addEventCoordinates = {};
     @observable addEventEmail = '';
-    @observable addEventImage = '';
+    @observable addEventImage = '1';
+    @observable addEventImageUrl = eventPic1;
 
     @observable submittingEvent = false;
 
     @observable categoryFilters = [{name: 'Veganism', checked: true, id: 'veganism'}, {name: 'Recycling', checked: true, id: 'recycling'}, {name: 'Energy', checked: true, id: 'energy'}];
+    @observable dateFilterSdate = moment().format('X');
+    @observable dateFilterEdate = moment().add(5, 'year').format('X');
 
 
     @action getEvents = () => {
         this.eventsLoading = true;
-        fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events?category=all&lat=' + this.userLocation.lat + '&lon=' + this.userLocation.lng + '&sdate=1449000000&edate=1649290750', {
+        fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events?category=all&lat=' + this.userLocation.lat + '&lon=' + this.userLocation.lng + '&sdate=1449000000&edate=1749290750', {
             headers: {'x-api-key': config.apiKey},
         }
         ).then(res => {
             return res.json();
         }).then(response => {
             this.events = response;
+            console.log('received events', response)
             // this.filteredEvents = response;
             this.eventsLoading = false;
         });
@@ -51,45 +57,68 @@ class EventsStore {
         });
     }
 
-    @action submitEvents = () => {
+    @action submitEvents = (authorId) => {
         this.submittingEvent = true;
-        fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events', {
-            headers: { 'x-api-key': config.apiKey },
-            method: 'POST',
-            body: JSON.stringify(
-                {
-                    title: this.addEventTitle, 
-                    description: this.addEventDescription,
-                    category: this.addEventCategory,
-                    location_name: this.addEventLocationName,
-                    contact: {email: this.addEventEmail},
-                    lat: this.addEventCoordinates.lat,
-                    lng: this.addEventCoordinates.lng,
-                    sdate: moment(this.addEventDate, 'YYYY-MM-DD').format('X')
-                })
-        },
-        ).then(res => {
-            return res.json();
-        }).then(response => {
-            this.submittingEvent = false;
-            this.addEventTitle = '';
-            this.addEventDescription = '';
-            this.addEventCategory = '';
-            this.addEventCoordinates = {};
-            this.addEventDate = '';
-            this.addEventLocationName = '';
-            this.addEventEmail = '';
-            this.events.unshift(response);
-            this.events = JSON.parse(JSON.stringify(this.events));
 
-            // this.filteredEvents.unshift(response);
-            // this.filteredEvents = JSON.parse(JSON.stringify(this.filteredEvents));
-        });
+        image2base64(this.addEventImageUrl).then((base64Img) => {
+                fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events', {
+                    headers: { 'x-api-key': config.apiKey },
+                    method: 'POST',
+                    body: JSON.stringify(
+                        {
+                            title: this.addEventTitle, 
+                            description: this.addEventDescription,
+                            category: this.addEventCategory,
+                            location_name: this.addEventLocationName,
+                            contact: {email: this.addEventEmail},
+                            lat: this.addEventCoordinates.lat,
+                            lng: this.addEventCoordinates.lng,
+                            sdate: moment(this.addEventDate, 'YYYY-MM-DD').format('X'),
+                            author_id: authorId,
+                            img: base64Img
+                        })
+                },
+                ).then(res => {
+                    return res.json();
+                }).then(response => {
+                    this.submittingEvent = false;
+                    this.addEventTitle = '';
+                    this.addEventDescription = '';
+                    this.addEventCategory = '';
+                    this.addEventCoordinates = {};
+                    this.addEventDate = '';
+                    this.addEventLocationName = '';
+                    this.addEventEmail = '';
+                    this.events.unshift(response);
+                    this.events = JSON.parse(JSON.stringify(this.events));
+
+                    // this.filteredEvents.unshift(response);
+                    // this.filteredEvents = JSON.parse(JSON.stringify(this.filteredEvents));
+                });
+            }
+        )
+        .catch(
+            (error) => {
+                console.error(error);
+            }
+        )
     }
 
     @action handleFilterChange = (eventName) => {
         this.categoryFilters.map(filter => filter.name === eventName ? filter.checked = !filter.checked : null);
         this.categoryFilters = JSON.parse(JSON.stringify(this.categoryFilters));
+    }
+
+    @action handleDateFilterChange = (type, event) => {
+        switch (type) {
+            case 'start':
+            this.dateFilterSdate = moment(event.target.value).format('X');
+            break;
+            case 'end':
+            this.dateFilterEdate = moment(event.target.value).format('X');
+            break;
+            default: console.log('event type not found');
+        }
     }
 
     @action setActiveEvent = (event_id) => {
@@ -148,7 +177,8 @@ class EventsStore {
                 this.addEventEmail = event.target.value;
             break;
             case 'image':
-            console.log('set image to', event.target.value)
+            console.log('set image to', event.target.url)
+                this.addEventImageUrl = event.target.url;
                 this.addEventImage = event.target.value;
             break;
             default: console.log('event not found');
@@ -161,6 +191,7 @@ class EventsStore {
     }
 
     @computed get filteredEvents() {
+        //  Filter the event type
         let fEvents = this.events.filter(event => {
             let eventCat = event.category;
             let selected = true;
@@ -172,7 +203,15 @@ class EventsStore {
             return selected;
         });
 
-        return fEvents;
+        //  Filter the dates
+        fEvents = fEvents.filter(event => {
+            return event.sdate >= this.dateFilterSdate && event.sdate <= this.dateFilterEdate;
+        });
+
+        //  Sort the events in chronological order
+        let sortedFilteredEvents = fEvents.sort((a, b) => a.sdate > b.sdate ? 1 : -1);
+
+        return sortedFilteredEvents;
     }
   }
   
