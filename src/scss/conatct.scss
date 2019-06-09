@@ -33,3 +33,26 @@
         }
     }
 }
+
+@media screen and (max-width: 400px) {
+    .contact-container {
+        .contact-title {
+            font-size: 2em !important; 
+        }
+
+        .contact-email {
+            font-size: 1em !important; 
+            top: 60% !important;
+            left: 10% !important;
+        }
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .contact-container {
+        overflow: hidden !important;
+        .contact-title {
+            font-size: 3em !important; 
+        }
+    }
+}

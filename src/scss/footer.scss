@@ -38,3 +38,11 @@
         color: $secondary;
     }
 }
+
+@media screen and (max-width: 400px) {
+    .footer-container {
+        .footer-logo {
+            font-size: 1em !important; 
+        }
+    }
+}

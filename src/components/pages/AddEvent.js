@@ -113,14 +113,14 @@ class AddEvent extends Component {
                                 <img className={addEventImage === '12' ? 'selected-image' : ''} src={eventPic12} alt="event 12" onClick={this.changeEventImage.bind(this, '12', eventPic12)}></img>
                                 <img className={addEventImage === '13' ? 'selected-image' : ''} src={eventPic13} alt="event 13" onClick={this.changeEventImage.bind(this, '13', eventPic13)}></img>
                                 <img className={addEventImage === '14' ? 'selected-image' : ''} src={eventPic14} alt="event 14" onClick={this.changeEventImage.bind(this, '14', eventPic14)}></img>
-                                <div className="image-upload" onClick={this.uploadImage}>
+                                {/* <div className="image-upload" onClick={this.uploadImage}>
                                     <div className="upload-button-container">
                                         <div className="upload-button-background"></div>
                                         <div className="upload-button">
                                             <BackupIcon></BackupIcon>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 </div>
                         </div>
                         <div className="add-event-button-container" onClick={submitEvents.bind(this, userId)}>

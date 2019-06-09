@@ -47,3 +47,16 @@
     outline: 0;
     border-bottom: 2px $primary solid;
 }
+
+@media screen and (max-width: 400px) {
+    .map-container {
+
+        .gmnoprint {
+            display: none !important;
+        }
+
+        .searchbox-input {
+            left: 10px !important;
+        }
+    }
+}

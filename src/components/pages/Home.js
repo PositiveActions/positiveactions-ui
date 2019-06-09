@@ -55,7 +55,7 @@ class Home extends Component {
                 <Header userLoggedIn={UserStore.userLoggedIn} userObject={this.props.UserStore.userObject} userId={this.props.UserStore.userId}></Header>
                 <div className="map-container">
                     {/* <Map></Map> */}
-                    <MapAlt events={events} onMarkerClick={this.handleMarkerClick} userLocation={userLocation} handlePositionChange={this.handlePositionChange}></MapAlt>
+                    <MapAlt events={filteredEvents} onMarkerClick={this.handleMarkerClick} userLocation={userLocation} handlePositionChange={this.handlePositionChange}></MapAlt>
                 </div>
                 <MapFooter></MapFooter>
                 <Filters events={filteredEvents} filterEvents={EventsStore.filterEvents} categoryFilters={EventsStore.categoryFilters} handleFilterChange={EventsStore.handleFilterChange} dateFilterEdate={EventsStore.dateFilterEdate} dateFilterSdate={EventsStore.dateFilterSdate} handleDateFilterChange={EventsStore.handleDateFilterChange}></Filters>

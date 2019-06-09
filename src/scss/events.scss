@@ -15,3 +15,38 @@
         margin-top: 10vh;
     }
 }
+
+@media screen and (max-width: 750px) {
+    .events-container {
+      .event-content {
+          .event-date {
+              font-size: 5em !important;
+          }
+          .event-location {
+            font-size: 0.7em !important;
+          }
+
+          .event-detail-info {
+              display: block !important;
+              .event-detail-content {
+                  height: auto !important;
+                  width: 100% !important;
+                  padding: 0 !important;
+                  .event-description {
+                      font-size: 0.8em !important;
+                  }
+              }
+
+              .event-image {
+                  width: 100% !important;
+              }
+          }
+      }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .event-meta-info {
+        display: block !important;
+    }
+}
