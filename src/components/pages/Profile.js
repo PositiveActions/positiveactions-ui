@@ -23,7 +23,7 @@ class Profile extends Component {
                 <HeaderAlt userLoggedIn={UserStore.userLoggedIn} userObject={this.props.UserStore.userObject} userId={this.props.UserStore.userId}></HeaderAlt>
                 <div className="profile-content">
                     <div to="/profile/1" className="profile">
-                        <div className="profile-image">{this.state.profileUser.username ? this.state.profileUser.username[0] : 'A'}</div>
+                        <div className="profile-image">{this.state.profileUser.username ? this.state.profileUser.username[0].toUpperCase() : 'A'}</div>
                         <div className="profile-name">{this.state.profileUser.username ? this.state.profileUser.username : 'Anonymous'}</div>
                     </div>
                     { UserStore.userId === urlUserId ?
@@ -34,7 +34,7 @@ class Profile extends Component {
                         </div>
                     </div> : null }
                 </div>
-                <div className={"logout-content-loading " + (UserStore.userLoggingOut ? 'visible-flex' : 'invisible')}>
+                <div className={"logout-content-loading " + ((UserStore.userLoggingOut || UserStore.gettingUser) ? 'visible-flex' : 'invisible')}>
                     <Loader></Loader>
                 </div>
                 <Footer></Footer>

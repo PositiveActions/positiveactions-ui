@@ -9,7 +9,6 @@ class AddComment extends Component {
     }
 
     render() {
-
         return (
             <div className="add-comment-container">
                 <div className="add-comment-main">

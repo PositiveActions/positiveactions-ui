@@ -35,6 +35,7 @@ class EventDetailsStore {
         }).then(response => {
             this.currentEvent = response.info ? response.info : {};
             this.participants = response.participants;
+            console.log('COMMENTS', response.comments)
             this.comments = response.comments;
             this.eventLoading = false;
         });

@@ -6,6 +6,7 @@ class Comments extends Component {
     render() {
 
         const { comments, userId, getUser, userLoggedIn } = this.props;
+        console.log('logged in', userLoggedIn);
 
         let commentsElm = comments.length > 0 ? comments.map(comment => <React.Fragment key={comment.comment_id}><Comment comment={comment} formatTimestamp={this.props.formatTimestamp} getUser={getUser}></Comment><br></br></React.Fragment>) : null;
 
@@ -21,9 +22,9 @@ class Comments extends Component {
                     <div className="comments">
                         {commentsElm}
                     </div>
-                    {userLoggedIn ? <AddComment addCommentInput={this.props.addCommentInput} changeCommentInput={this.props.changeCommentInput} submitCommentInput={this.props.submitCommentInput} commentLength={this.props.commentLength} userId={userId} getUser={getUser}></AddComment> : null}
                 </React.Fragment>
                 : null }
+                {userLoggedIn ? <AddComment addCommentInput={this.props.addCommentInput} changeCommentInput={this.props.changeCommentInput} submitCommentInput={this.props.submitCommentInput} commentLength={this.props.commentLength} userId={userId} getUser={getUser}></AddComment> : null}
             </div>
         );
     }

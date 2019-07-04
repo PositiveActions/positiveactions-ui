@@ -18,3 +18,20 @@
         margin-top: 10px;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .comments-title {
+        font-size: 5em !important;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .comments-container {
+        width: 90% !important;
+        margin-left: 5% !important;
+
+        .comments-title {
+            font-size: 3em !important;
+        }
+    }
+}

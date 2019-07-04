@@ -39,7 +39,7 @@ class FiltersForm extends Component {
                             <TextField
                                 label="Start"
                                 type="date"
-                                defaultValue="2019-02-25"
+                                // defaultValue="2019-02-25"
                                 value={moment(Number(dateFilterSdate) * 1000).format('YYYY-MM-DD')}
                                 onChange={this.props.handleDateFilterChange.bind(this, 'start')}
                                 InputLabelProps={{
@@ -49,7 +49,7 @@ class FiltersForm extends Component {
                             <TextField
                                 label="End"
                                 type="date"
-                                defaultValue="2019-02-25"
+                                // defaultValue="2019-02-25"
                                 onChange={this.props.handleDateFilterChange.bind(this, 'end')}
                                 value={moment(Number(dateFilterEdate) * 1000).format('YYYY-MM-DD')}
                                 InputLabelProps={{

@@ -27,7 +27,7 @@ import eventPic14 from '../../assets/thumbnails/event-pic14.jpg';
 class AddEvent extends Component {
     render() {
     
-        const { addEventTitle, addEventDescription, addEventDate, addEventCategory, addEventLocationName, addEventEmail, onAddEventChange, submitEvents, submittingEvent, addEventDescriptionLength, addEventImage } = this.props.EventsStore;
+        const { addEventTitle, addEventDescription, addEventDate, addEventCategory, addEventLocationName, addEventEmail, onAddEventChange, submitEvents, submittingEvent, addEventDescriptionLength, addEventImage, submitErrorMessage } = this.props.EventsStore;
 
         const { userId } = this.props.UserStore;
         
@@ -81,10 +81,11 @@ class AddEvent extends Component {
                                 onChange={onAddEventChange.bind(this, 'category')}
                                 input={<FilledInput name="category" id="filled-category-simple" />}
                             >
-                                <MenuItem value={'global-ecology'}>Global Ecology</MenuItem>
-                                <MenuItem value={'biodiversity'}>Biodiversity</MenuItem>
-                                <MenuItem value={'energy'}>Energy</MenuItem>
+                                <MenuItem value={'environment'}>Environment</MenuItem>
+                                <MenuItem value={'recycling'}>Recycling</MenuItem>
+                                <MenuItem value={'social'}>Social</MenuItem>
                                 <MenuItem value={'veganism'}>Veganism</MenuItem>
+                                <MenuItem value={'other'}>Other</MenuItem>
                             </Select>
                         </FormControl>
                         <PlacesWithStandaloneSearchBox addEventLocationName={addEventLocationName} onAddEventChange={onAddEventChange}></PlacesWithStandaloneSearchBox>
@@ -129,6 +130,7 @@ class AddEvent extends Component {
                                 add event
                             </div>
                         </div>
+                        <p className="error-message">{submitErrorMessage}</p>
                     </form>
                 </div>
                 <div className={'submitting-event-' + (submittingEvent ? 'visible' : 'hidden')}>

@@ -25,8 +25,9 @@ class EventsStore {
     @observable addEventImageUrl = eventPic1;
 
     @observable submittingEvent = false;
+    @observable submitErrorMessage = '';
 
-    @observable categoryFilters = [{name: 'Veganism', checked: true, id: 'veganism'}, {name: 'Recycling', checked: true, id: 'recycling'}, {name: 'Energy', checked: true, id: 'energy'}];
+    @observable categoryFilters = [{name: 'Veganism', checked: true, id: 'veganism'}, {name: 'Recycling', checked: true, id: 'recycling'}, {name: 'Environment', checked: true, id: 'environment'}, {name: 'Social', checked: true, id: 'social'}, {name: 'Other', checked: true, id: 'other'}];
     @observable dateFilterSdate = moment().format('X');
     @observable dateFilterEdate = moment().add(5, 'year').format('X');
 
@@ -39,8 +40,8 @@ class EventsStore {
         ).then(res => {
             return res.json();
         }).then(response => {
+            // console.log('received events', response)
             this.events = response;
-            console.log('received events', response)
             // this.filteredEvents = response;
             this.eventsLoading = false;
         });
@@ -58,6 +59,27 @@ class EventsStore {
     }
 
     @action submitEvents = (authorId) => {
+        if (this.addEventTitle === '') {
+            this.submitErrorMessage = 'A title for the event must be specified.';
+            return;
+        }
+        if (this.addEventDescription === '') {
+            this.submitErrorMessage = 'A description for the event must be specified.';
+            return;
+        }
+        if (this.addEventLocationName === '') {
+            this.submitErrorMessage = 'A location for the event must be specified.';
+            return;
+        }
+        if (this.addEventEmail === '') {
+            this.submitErrorMessage = 'A contact email for the event must be specified.';
+            return;
+        }
+        if (this.addEventDate === '') {
+            this.submitErrorMessage = 'A date email for the event must be specified.';
+            return;
+        }
+        this.submitErrorMessage = '';
         this.submittingEvent = true;
 
         image2base64(this.addEventImageUrl).then((base64Img) => {
@@ -210,7 +232,6 @@ class EventsStore {
 
         //  Sort the events in chronological order
         let sortedFilteredEvents = fEvents.sort((a, b) => a.sdate > b.sdate ? 1 : -1);
-
         return sortedFilteredEvents;
     }
   }

@@ -11,12 +11,12 @@ class Comment extends Component {
     render() {
 
         const { comment, formatTimestamp, getUser } = this.props;
-
+        console.log(this.state.commentUser)
         return (
             <div className="comment-container">
-                <Link to="/profile/1" className="profile">
+                <Link to={"/profile/" + this.state.commentUser.user_id} className="profile">
                     {/* <div className="profile-image">{comment.author.split(' ')[0][0] + comment.author.split(' ')[1][0]}</div> */}
-                    <div className="profile-image">{this.state.commentUser.username ? this.state.commentUser.username[0] : 'A'}</div>
+                    <div className="profile-image">{this.state.commentUser.username ? this.state.commentUser.username[0].toUpperCase() : 'A'}</div>
                     <div className="profile-name">{this.state.commentUser.username ? this.state.commentUser.username : 'Anonymous'}</div>
                 </Link>
                 <div className="comment-text">
