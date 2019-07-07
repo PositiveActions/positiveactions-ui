@@ -1,5 +1,5 @@
 import { observable, action, computed } from "mobx";
-import config from '../config/config.json';
+// import config from '../config/config.json';
 
 class EventDetailsStore {
     @observable comments = [];

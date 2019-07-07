@@ -3,7 +3,7 @@ import { compose, withProps, lifecycle } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps"
 import { SearchBox } from 'react-google-maps/lib/components/places/SearchBox';
 import _ from 'lodash';
-import config from '../../config/config.json';
+// import config from '../../config/config.json';
 import MapMarkers from "./MapMarkers.js";
 
 const MyMapComponent = compose(

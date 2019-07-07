@@ -1,6 +1,6 @@
 import { observable, action } from "mobx";
 import * as moment from 'moment-timezone';
-import config from '../config/config.json';
+// import config from '../config/config.json';
 import { Auth } from 'aws-amplify';
 
 

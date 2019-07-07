@@ -2,7 +2,7 @@ import React from "react"
 import { compose, withProps, lifecycle } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker} from "react-google-maps";
 import _ from 'lodash';
-import config from '../../config/config.json';
+// import config from '../../config/config.json';
 
 const DetailMapComponent = compose(
   withProps({

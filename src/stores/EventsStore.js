@@ -1,5 +1,5 @@
 import { observable, action, computed } from "mobx";
-import config from '../config/config.json';
+// import config from '../config/config.json';
 import * as moment from 'moment-timezone';
 import * as image2base64 from 'image-to-base64';
 import eventPic1 from '../assets/thumbnails/event-pic1.jpg';
