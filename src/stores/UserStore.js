@@ -167,7 +167,7 @@ class UserStore {
     @action getUser = (userId) => {
         this.gettingUser = true;
         return fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/user?userId=' + userId, {
-            headers: {'x-api-key': config.apiKey},
+            headers: {'x-api-key': process.env.AWS_APIKEY},
         },
         ).then(res => {
             return res.json();

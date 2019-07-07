@@ -6,7 +6,7 @@ import config from '../../config/config.json';
 
 const DetailMapComponent = compose(
   withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=" + config.googlMapsKey,
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=" + process.env.GOOGLEMAPS_APIKEY,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `100%`, width: `100%` }} />,
     mapElement: <div style={{ height: `100%` }} />,
