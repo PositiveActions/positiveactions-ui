@@ -43,7 +43,7 @@ class Home extends Component {
 
     render() {
         const { EventsStore, UserStore } = this.props;
-        const events = EventsStore.events;
+        // const events = EventsStore.events;
         const filteredEvents = EventsStore.filteredEvents;
         const eventsLoading = EventsStore.eventsLoading;
 

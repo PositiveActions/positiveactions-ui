@@ -214,24 +214,29 @@ class EventsStore {
 
     @computed get filteredEvents() {
         //  Filter the event type
-        let fEvents = this.events.filter(event => {
-            let eventCat = event.category;
-            let selected = true;
-            this.categoryFilters.forEach(filter => {
-                if (filter.id === eventCat) {
-                    selected = filter.checked;
-                }
+        let fEvents = [];
+        let sortedFilteredEvents = [];
+        if (this.events.length > 0) {
+            fEvents = this.events.filter(event => {
+                let eventCat = event.category;
+                let selected = true;
+                this.categoryFilters.forEach(filter => {
+                    if (filter.id === eventCat) {
+                        selected = filter.checked;
+                    }
+                });
+                return selected;
             });
-            return selected;
-        });
-
         //  Filter the dates
         fEvents = fEvents.filter(event => {
             return event.sdate >= this.dateFilterSdate && event.sdate <= this.dateFilterEdate;
         });
 
         //  Sort the events in chronological order
-        let sortedFilteredEvents = fEvents.sort((a, b) => a.sdate > b.sdate ? 1 : -1);
+        if (fEvents.length > 0) {
+            sortedFilteredEvents = fEvents.sort((a, b) => a.sdate > b.sdate ? 1 : -1);
+        }
+        }
         return sortedFilteredEvents;
     }
   }
