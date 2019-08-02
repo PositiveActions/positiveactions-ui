@@ -35,7 +35,7 @@ class EventsStore {
     @action getEvents = () => {
         this.eventsLoading = true;
         fetch('https://api.positiveactions.co/events?category=all&lat=' + this.userLocation.lat + '&lon=' + this.userLocation.lng + '&sdate=1449000000&edate=1749290750', {
-            headers: {'x-api-key': process.env.AWS_APIKEY},
+            headers: {'x-api-key': process.env.REACT_APP_AWS_APIKEY},
         }
         ).then(res => {
             return res.json();
@@ -49,7 +49,7 @@ class EventsStore {
 
     @action getEventImage = (imageName) => {
         return fetch('https://api.positiveactions.co/image?key=' + imageName, {
-            headers: {'x-api-key': process.env.AWS_APIKEY},
+            headers: {'x-api-key': process.env.REACT_APP_AWS_APIKEY},
         }
         ).then(res => {
             return res.json();
@@ -84,7 +84,7 @@ class EventsStore {
 
         image2base64(this.addEventImageUrl).then((base64Img) => {
                 fetch('https://api.positiveactions.co/events', {
-                    headers: { 'x-api-key': process.env.AWS_APIKEY },
+                    headers: { 'x-api-key': process.env.REACT_APP_AWS_APIKEY },
                     method: 'POST',
                     body: JSON.stringify(
                         {

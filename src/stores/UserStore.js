@@ -167,7 +167,7 @@ class UserStore {
     @action getUser = (userId) => {
         this.gettingUser = true;
         return fetch('https://api.positiveactions.co/user?userId=' + userId, {
-            headers: {'x-api-key': process.env.AWS_APIKEY},
+            headers: {'x-api-key': process.env.REACT_APP_AWS_APIKEY},
         },
         ).then(res => {
             return res.json();
