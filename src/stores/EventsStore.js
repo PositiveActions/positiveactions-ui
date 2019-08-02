@@ -34,7 +34,7 @@ class EventsStore {
 
     @action getEvents = () => {
         this.eventsLoading = true;
-        fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events?category=all&lat=' + this.userLocation.lat + '&lon=' + this.userLocation.lng + '&sdate=1449000000&edate=1749290750', {
+        fetch('https://api.positiveactions.co/events?category=all&lat=' + this.userLocation.lat + '&lon=' + this.userLocation.lng + '&sdate=1449000000&edate=1749290750', {
             headers: {'x-api-key': process.env.AWS_APIKEY},
         }
         ).then(res => {
@@ -48,7 +48,7 @@ class EventsStore {
     }
 
     @action getEventImage = (imageName) => {
-        return fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/image?key=' + imageName, {
+        return fetch('https://api.positiveactions.co/image?key=' + imageName, {
             headers: {'x-api-key': process.env.AWS_APIKEY},
         }
         ).then(res => {
@@ -83,7 +83,7 @@ class EventsStore {
         this.submittingEvent = true;
 
         image2base64(this.addEventImageUrl).then((base64Img) => {
-                fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events', {
+                fetch('https://api.positiveactions.co/events', {
                     headers: { 'x-api-key': process.env.AWS_APIKEY },
                     method: 'POST',
                     body: JSON.stringify(

@@ -14,7 +14,7 @@ class EventDetailsStore {
     @observable eventLoading = false;
 
     @action getEventComments = (event_id) => {
-        fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events/' + event_id, {
+        fetch('https://api.positiveactions.co/events/' + event_id, {
             headers: { 'x-api-key': process.env.AWS_APIKEY },
         }
         ).then(res => {
@@ -27,7 +27,7 @@ class EventDetailsStore {
 
     @action getEvent = (event_id) => {
         this.eventLoading = true;
-        fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/events/' + event_id, {
+        fetch('https://api.positiveactions.co/events/' + event_id, {
             headers: { 'x-api-key': process.env.AWS_APIKEY },
         }
         ).then(res => {
@@ -47,7 +47,7 @@ class EventDetailsStore {
 
     @action submitCommentInput = (userId) => {
         console.log(this.addCommentInputs, this.currentEvent.event_id)
-        fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/comments', {
+        fetch('https://api.positiveactions.co/comments', {
             headers: { 'x-api-key': process.env.AWS_APIKEY },
             method: 'POST',
             body: JSON.stringify({message: this.addCommentInputs, event_id: this.currentEvent.event_id, user_id: userId})
@@ -62,7 +62,7 @@ class EventDetailsStore {
     }
 
     @action submitParticipant = () => {
-        fetch('https://cors-anywhere.herokuapp.com/https://zpui5msqkg.execute-api.us-east-1.amazonaws.com/dev/participant', {
+        fetch('https://api.positiveactions.co/participant', {
             headers: { 'x-api-key': process.env.AWS_APIKEY },
             method: 'POST',
             body: JSON.stringify({event_id: this.currentEvent.event_id})
