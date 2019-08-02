@@ -12,9 +12,18 @@ class Filters extends Component {
 
     onCollapse = () => {
         if (!this.state.collapsedFilters) {
-            document.getElementsByClassName('filters-container')[0].getElementsByClassName('MuiSvgIcon-root-1')[0].style.transform = 'rotate(90deg)';
+            if (process.env.NODE_ENV == 'production') {
+                document.getElementsByClassName('filters-container')[0].getElementsByClassName('jss1')[0].style.transform = 'rotate(90deg)';
+            } else {
+                document.getElementsByClassName('filters-container')[0].getElementsByClassName('MuiSvgIcon-root-1')[0].style.transform = 'rotate(90deg)';
+            }
         } else {
-            document.getElementsByClassName('filters-container')[0].getElementsByClassName('MuiSvgIcon-root-1')[0].style.transform = 'rotate(0deg)';
+            if (process.env.NODE_ENV == 'production') {
+                document.getElementsByClassName('filters-container')[0].getElementsByClassName('jss1')[0].style.transform = 'rotate(0deg)';
+            } else {
+                document.getElementsByClassName('filters-container')[0].getElementsByClassName('MuiSvgIcon-root-1')[0].style.transform = 'rotate(0deg)';
+            }
+            
         }
         this.setState({collapsedFilters: !this.state.collapsedFilters});
     }
